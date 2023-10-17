@@ -44,7 +44,7 @@ struct ContentView: View {
                             .cornerRadius(30)
                     })
                     Spacer()
-                    
+                
                     NavigationLink(destination: {
                         RegisterView(username: "") // För att den ska vara tyst
                     }, label: {

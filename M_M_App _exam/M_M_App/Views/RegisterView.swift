@@ -53,6 +53,10 @@ struct RegisterView: View {
     }
 }
 
-#Preview {
-    RegisterView(username: "")
+struct RegisterView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        RegisterView(username: "SOmething")
+    }
+    
 }

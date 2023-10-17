@@ -20,6 +20,10 @@ struct CustomButton: View {
     }
 }
 
-#Preview {
-    CustomButton(title: "")
+struct CustomButton_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        CustomButton(title: "Something")
+    }
+    
 }

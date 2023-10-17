@@ -39,7 +39,7 @@ struct RegisterView: View {
                 Button(action: {}, label: {
                     Text("Confirm")
                         .frame(width: 350, height: 45)
-                        .background(.indigo)
+                        .background(.brown)
                         .foregroundStyle(.white)
                         .cornerRadius(30)
                 })

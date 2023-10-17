@@ -39,7 +39,7 @@ struct ContentView: View {
                     Button(action: {}, label: {
                         Text("Login")
                             .frame(width: 350, height: 45)
-                            .background(.indigo)
+                            .background(.brown)
                             .foregroundStyle(.white)
                             .cornerRadius(30)
                     })

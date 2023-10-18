@@ -15,18 +15,11 @@ struct MainView : View {
             VStack{
                 HStack(spacing: 20){
                     Image(systemName: "person").foregroundColor(.white)
-                   // Spacer()
-                    Text("Hello").foregroundStyle(.white)
+                 
+                    Text("Username").foregroundStyle(.white)
                    
                 }.padding(.trailing,180)
-                VStack{
-                    Text("My Pictures").foregroundStyle(.white).bold().font(.title).padding(40)
-                    Text("My notes").foregroundStyle(.white).bold().font(.title).padding(40)
-                    Text("My contacts").foregroundStyle(.white).bold().font(.title).padding(40)
-                    Text("Show Pictures").foregroundStyle(.white).bold().font(.title).padding(40)
-                   
-                }
-               
+                
                 Spacer()
                 
             }

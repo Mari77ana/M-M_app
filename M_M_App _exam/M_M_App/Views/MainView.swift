@@ -13,7 +13,14 @@ struct MainView : View {
         ZStack{
             Color.black.ignoresSafeArea()
             VStack{
-                Text("Hello").foregroundStyle(.white)
+                HStack(spacing: 20){
+                    Image(systemName: "person").foregroundColor(.white)
+                   // Spacer()
+                    Text("Hello").foregroundStyle(.white)
+                   
+                }.padding(.trailing,180)
+               
+                Spacer()
             }
         }
        

@@ -23,6 +23,7 @@
 		0756AD812ADAEF640092F7FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD802ADAEF630092F7FF /* RegisterView.swift */; };
 		0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD822ADAFBC90092F7FF /* ProfileView.swift */; };
 		0756AD862ADB0B930092F7FF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD852ADB0B930092F7FF /* CustomButton.swift */; };
+		49FD51862ADFF89F004B1004 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FD51852ADFF89F004B1004 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		0756AD802ADAEF630092F7FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0756AD822ADAFBC90092F7FF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0756AD852ADB0B930092F7FF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		49FD51852ADFF89F004B1004 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				0756AD442ADAC3720092F7FF /* ContentView.swift */,
 				0756AD802ADAEF630092F7FF /* RegisterView.swift */,
 				0756AD822ADAFBC90092F7FF /* ProfileView.swift */,
+				49FD51852ADFF89F004B1004 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0756AD452ADAC3720092F7FF /* ContentView.swift in Sources */,
+				49FD51862ADFF89F004B1004 /* MainView.swift in Sources */,
 				0756AD812ADAEF640092F7FF /* RegisterView.swift in Sources */,
 				0756AD862ADB0B930092F7FF /* CustomButton.swift in Sources */,
 				0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */,

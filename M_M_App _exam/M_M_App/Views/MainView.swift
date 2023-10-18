@@ -10,9 +10,13 @@ import SwiftUI
 
 struct MainView : View {
     var body: some View{
-        VStack{
-            Text("Hello")
+        ZStack{
+            Color.black.ignoresSafeArea()
+            VStack{
+                Text("Hello").foregroundStyle(.white)
+            }
         }
+       
     }
 }
 

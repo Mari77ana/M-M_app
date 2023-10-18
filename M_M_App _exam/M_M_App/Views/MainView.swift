@@ -21,9 +21,11 @@ struct MainView : View {
                 }.padding(.trailing,180)
                 VStack{
                     Text("My Pictures").foregroundStyle(.white).bold().font(.title).padding(40)
+                    Text("My notes").foregroundStyle(.white).bold().font(.title).padding(40)
                 }
                
                 Spacer()
+                
             }
         }
        

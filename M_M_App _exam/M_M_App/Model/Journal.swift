@@ -22,4 +22,6 @@ class Journal: ObservableObject{
     func addEntry(entry: JournalEntry){
         entries.append(entry)
     }
+    
+    
 }

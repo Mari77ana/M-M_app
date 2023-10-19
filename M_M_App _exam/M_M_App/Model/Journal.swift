@@ -23,5 +23,10 @@ class Journal: ObservableObject{
         entries.append(entry)
     }
     
+    func deleteEntry(byId:UUID){
+        if let index = entries.firstIndex(where: {$0.id == byId})
+        {entries.remove(at: index)}
+    }
+    
     
 }

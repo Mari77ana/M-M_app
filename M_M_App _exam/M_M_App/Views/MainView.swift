@@ -13,6 +13,8 @@ struct MainView : View {
     @StateObject var myJournal = Journal()
     
     @State var showPopUp = false
+    
+
     var body: some View{
        
             
@@ -65,7 +67,7 @@ struct Grid: View{
                       pinnedViews: [],
                       content: { ForEach(journal.getEntries()){
                 entry in
-                NavigationLink(destination: ViewNotePhoto(entry: entry)){
+                NavigationLink(destination: ViewNotePhoto(entry: entry, journal: journal)){
                     Rectangle().frame(width: 70, height: 80, alignment: .center)
                     
                 }}})

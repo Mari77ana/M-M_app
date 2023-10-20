@@ -10,13 +10,24 @@ import SwiftUI
 struct ViewNotePhoto: View {
     var entry: JournalEntry
     @ObservedObject var journal: Journal
+    @State var isDeleted: Bool = false
+    
     
    
     var body: some View {
         VStack{
-            Text(entry.title)
-            Text(entry.description)
-            Button(action: {journal.deleteEntry(byId: entry.id)}, label: {Text("Delete")})
+            if !isDeleted {
+                Text(entry.title)
+                Text(entry.description)}
+            Button(action:{
+                journal.deleteEntry(byId: entry.id)
+               isDeleted = true
+               
+            }, label: {
+                Text("Delete")
+                
+            })
+           
         }
     }
 }

@@ -26,7 +26,7 @@ class DbConnection: ObservableObject{
             if let user = user {
                 
                 print("User has logged in with email \(user.email ?? "No Email")")
-               // self.currentUser = user
+                self.currentUser = user
                
             }
             else{
@@ -36,6 +36,11 @@ class DbConnection: ObservableObject{
             
         }
     }
+    
+    
+    
+    
+    
     
     
     

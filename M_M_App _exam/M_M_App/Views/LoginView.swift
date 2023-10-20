@@ -1,14 +1,14 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  M_M_App
 //
-//  Created by Mariana Laic on 2023-10-14.
+//  Created by Mariana Laic on 2023-10-20.
 //
 
 import SwiftUI
 import FirebaseFirestore
 
-struct ContentView: View {
+struct LoginView: View {
     
     var db = Firestore.firestore()
     @State var email = ""
@@ -47,7 +47,7 @@ struct ContentView: View {
                     Spacer()
                 
                     NavigationLink(destination: {
-                        RegisterView() 
+                        RegisterView()
                     }, label: {
                         HStack(spacing: 10){
                             Text("Don't have an account?")
@@ -65,11 +65,10 @@ struct ContentView: View {
     }// Body Ends
     
 }// Content Ends
+        
+        
 
-struct ContentView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        ContentView()
-    }
-    
+
+#Preview {
+    LoginView()
 }

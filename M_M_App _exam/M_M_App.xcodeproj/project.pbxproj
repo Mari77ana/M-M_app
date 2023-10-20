@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07410CA92AE296A200E71844 /* DbConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07410CA82AE296A200E71844 /* DbConnection.swift */; };
 		0756AD432ADAC3720092F7FF /* M_M_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD422ADAC3720092F7FF /* M_M_AppApp.swift */; };
 		0756AD452ADAC3720092F7FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD442ADAC3720092F7FF /* ContentView.swift */; };
 		0756AD472ADAC3740092F7FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0756AD462ADAC3740092F7FF /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07410CA82AE296A200E71844 /* DbConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbConnection.swift; sourceTree = "<group>"; };
 		0756AD3F2ADAC3720092F7FF /* M_M_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M_M_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0756AD422ADAC3720092F7FF /* M_M_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_M_AppApp.swift; sourceTree = "<group>"; };
 		0756AD442ADAC3720092F7FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				0756AD7B2ADAEAA50092F7FF /* User.swift */,
+				07410CA82AE296A200E71844 /* DbConnection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				0756AD452ADAC3720092F7FF /* ContentView.swift in Sources */,
 				49FD51862ADFF89F004B1004 /* MainView.swift in Sources */,
 				0756AD812ADAEF640092F7FF /* RegisterView.swift in Sources */,
+				07410CA92AE296A200E71844 /* DbConnection.swift in Sources */,
 				0756AD862ADB0B930092F7FF /* CustomButton.swift in Sources */,
 				0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */,
 				0756AD432ADAC3720092F7FF /* M_M_AppApp.swift in Sources */,

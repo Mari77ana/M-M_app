@@ -12,6 +12,7 @@ struct ContentView: View {
     
     var db = Firestore.firestore()
     @State var email = ""
+    @State var password = ""
     
     var body: some View {
         
@@ -31,7 +32,7 @@ struct ContentView: View {
                         .frame(width: 350, height: 40)
                         .border(.black)
                     
-                    SecureField("Enter your password", text: $email)
+                    SecureField("Enter your password", text: $password)
                         .padding(10)
                         .frame(width: 350, height: 40)
                         .border(.black)
@@ -46,7 +47,7 @@ struct ContentView: View {
                     Spacer()
                 
                     NavigationLink(destination: {
-                        RegisterView(username: "") // För att den ska vara tyst
+                        RegisterView() 
                     }, label: {
                         HStack(spacing: 10){
                             Text("Don't have an account?")

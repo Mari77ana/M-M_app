@@ -24,7 +24,7 @@
 		0756AD7C2ADAEAA50092F7FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD7B2ADAEAA50092F7FF /* User.swift */; };
 		0756AD812ADAEF640092F7FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD802ADAEF630092F7FF /* RegisterView.swift */; };
 		0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD822ADAFBC90092F7FF /* ProfileView.swift */; };
-		0756AD862ADB0B930092F7FF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0756AD852ADB0B930092F7FF /* CustomButton.swift */; };
+		07B1187C2AE3EB6200EBAF77 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1187B2AE3EB6200EBAF77 /* UserData.swift */; };
 		49FD51862ADFF89F004B1004 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FD51852ADFF89F004B1004 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,7 @@
 		0756AD7B2ADAEAA50092F7FF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0756AD802ADAEF630092F7FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0756AD822ADAFBC90092F7FF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		0756AD852ADB0B930092F7FF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		07B1187B2AE3EB6200EBAF77 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		49FD51852ADFF89F004B1004 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,7 @@
 		0756AD412ADAC3720092F7FF /* M_M_App */ = {
 			isa = PBXGroup;
 			children = (
-				0756AD842ADB0B510092F7FF /* Component */,
+				07B1187F2AE3EDCA00EBAF77 /* Authenticated */,
 				0756AD7D2ADAEE880092F7FF /* Views */,
 				0756AD7A2ADAEA6F0092F7FF /* Model */,
 				0756AD422ADAC3720092F7FF /* M_M_AppApp.swift */,
@@ -168,6 +168,7 @@
 			children = (
 				0756AD7B2ADAEAA50092F7FF /* User.swift */,
 				07410CA82AE296A200E71844 /* DbConnection.swift */,
+				07B1187B2AE3EB6200EBAF77 /* UserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,20 +176,27 @@
 		0756AD7D2ADAEE880092F7FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0756AD802ADAEF630092F7FF /* RegisterView.swift */,
-				0756AD822ADAFBC90092F7FF /* ProfileView.swift */,
-				49FD51852ADFF89F004B1004 /* MainView.swift */,
-				07410CAA2AE2A3E500E71844 /* LoginView.swift */,
+				07B1187D2AE3EBF900EBAF77 /* UnAuthenticated */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0756AD842ADB0B510092F7FF /* Component */ = {
+		07B1187D2AE3EBF900EBAF77 /* UnAuthenticated */ = {
 			isa = PBXGroup;
 			children = (
-				0756AD852ADB0B930092F7FF /* CustomButton.swift */,
+				07410CAA2AE2A3E500E71844 /* LoginView.swift */,
+				0756AD802ADAEF630092F7FF /* RegisterView.swift */,
 			);
-			path = Component;
+			path = UnAuthenticated;
+			sourceTree = "<group>";
+		};
+		07B1187F2AE3EDCA00EBAF77 /* Authenticated */ = {
+			isa = PBXGroup;
+			children = (
+				49FD51852ADFF89F004B1004 /* MainView.swift */,
+				0756AD822ADAFBC90092F7FF /* ProfileView.swift */,
+			);
+			path = Authenticated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,9 +344,9 @@
 				0756AD812ADAEF640092F7FF /* RegisterView.swift in Sources */,
 				07410CAB2AE2A3E500E71844 /* LoginView.swift in Sources */,
 				07410CA92AE296A200E71844 /* DbConnection.swift in Sources */,
-				0756AD862ADB0B930092F7FF /* CustomButton.swift in Sources */,
 				0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */,
 				0756AD432ADAC3720092F7FF /* M_M_AppApp.swift in Sources */,
+				07B1187C2AE3EB6200EBAF77 /* UserData.swift in Sources */,
 				0756AD7C2ADAEAA50092F7FF /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

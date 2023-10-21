@@ -10,11 +10,34 @@ import FirebaseFirestore
 
 struct ContentView: View {
     
+   @StateObject var db = DbConnection()
+    
     
     var body: some View {
         
+        if let user = db.currentUser{
+            NavigationStack{
+                VStack{
+                    MainView()
+                }
+            }
+            
+            
+        } else{
+            NavigationStack{
+                LoginView(db: db)
+            }
+           
+        }
+            
+       
+            
+             
+            
+            
         
-        Text("Hello")
+        
+        
     }
     
     

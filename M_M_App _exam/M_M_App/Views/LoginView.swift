@@ -9,10 +9,12 @@ import SwiftUI
 import FirebaseFirestore
 
 struct LoginView: View {
+    @ObservedObject var db: DbConnection
     
-    var db = Firestore.firestore()
+    //var db = Firestore.firestore()
     @State var email = ""
     @State var password = ""
+ 
     
     var body: some View {
         
@@ -37,17 +39,25 @@ struct LoginView: View {
                         .frame(width: 350, height: 40)
                         .border(.black)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                        if !email.isEmpty && !password.isEmpty {
+                            // Create Login
+                           
+                        }
+                       
+                    }, label: {
                         Text("Login")
                             .frame(width: 350, height: 45)
                             .background(.indigo)
                             .foregroundStyle(.white)
                             .cornerRadius(30)
                     })
+                    
                     Spacer()
                 
                     NavigationLink(destination: {
-                        RegisterView()
+                        RegisterView(db: db)
                     }, label: {
                         HStack(spacing: 10){
                             Text("Don't have an account?")
@@ -66,9 +76,21 @@ struct LoginView: View {
     
 }// Content Ends
         
-        
-
-
-#Preview {
-    LoginView()
+  
+struct LoginView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+       LoginView(db: DbConnection())
+    }
+    
 }
+
+
+
+
+// Nya filer skapas med nya versionen
+/*
+ #Preview {
+ LoginView(db: DbConnection())
+ }
+ */

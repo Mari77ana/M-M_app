@@ -82,6 +82,18 @@ struct LoginView: View {
                             .foregroundStyle(.white)
                             .cornerRadius(30)
                     })
+                    Spacer()
+                    
+                    NavigationLink(destination: {
+                                          RegisterView(db: db)
+                                      }, label: {
+                                          HStack(spacing: 10){
+                                              Text("Don't have an account?")
+                                              Text("Sign Up!").bold()
+                                          }
+                                      })
+                    
+                    
                     
                     
                 }.padding(60)

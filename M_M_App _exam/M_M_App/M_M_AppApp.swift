@@ -23,10 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 
 
-
-
-
-
 @main
 struct M_M_AppApp: App {
     
@@ -34,7 +30,9 @@ struct M_M_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+        LoginView(db: DbConnection())
+           //ContentView()
+          //RegisterView(db: DbConnection())
         }
     }
 }

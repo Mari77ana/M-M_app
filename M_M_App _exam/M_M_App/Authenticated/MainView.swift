@@ -19,8 +19,11 @@ struct MainView : View {
                     Image(systemName: "person").foregroundColor(.white)
                  
                     Text("Username").foregroundStyle(.white)
+                    
+                    Text("Testing")
                    
                 }.padding(.trailing,180)
+                
                 
                 Spacer()
                 

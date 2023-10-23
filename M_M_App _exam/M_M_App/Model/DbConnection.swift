@@ -15,22 +15,34 @@ class DbConnection: ObservableObject{
     var auth = Auth.auth()
     
     // Kommande implementation för Databas
-     let USER_DATA_COLLECTION = "user_data"
+    let USER_DATA_COLLECTION = "user_data" // UserData() = "user_data"
     
     @Published var currentUser: User?
+    @Published var currentUserData: UserData?
+    var dbListener: ListenerRegistration?
     
+    
+    // * App Starts Here *
     init() {
         
         auth.addStateDidChangeListener { [self] auth, user in
             
             if let user = user {
                 
+                /// User has logged in
                 print("User has logged in with email \(user.email ?? "No Email")")
                 self.currentUser = user
-               
+                
+                ///
+                self.startListeningToDb()
+                
             }
             else{
-                currentUser = nil
+                /// User has logged out, cleans all data
+                self.dbListener?.remove() /// have to listnen at a time, stop listening if user has loged out
+                self.dbListener = nil
+                self.currentUser = nil
+                self.currentUserData = nil
                 print("User has logged out")
             }
             
@@ -38,29 +50,38 @@ class DbConnection: ObservableObject{
     }
     
     
-   /*
+    
     func startListeningToDb(){
         
-        db.collection(self.USER_DATA_COLLECTION).addSnapshotListener{
+        guard let user = currentUser else{return}
+        
+        /// Listening only on the user id document , not the hole collection ,  use user.uid
+        dbListener = db.collection(self.USER_DATA_COLLECTION).document(user.uid).addSnapshotListener{
             snapshot, error in
             
             if let error = error {
                 print("Error occured \(error.localizedDescription)")
                 return
             }
-            guard let snapshot = snapshot else{return}
+            guard let documentSnapshot = snapshot else{return}
             
-            for document in snapshot.documents{
-                let result = Result{
-                   // try document.data(as: ProfileView.self)
-                }
+            let result = Result{
+                try documentSnapshot.data(as: UserData.self)
             }
+            switch result{
+            case  .success(let UserData):
+                self.currentUserData = UserData
+            case .failure(let error) :
+                print(error.localizedDescription)
+            }
+            
             
         }
         
-    }
-    */
-     
+    }// startListening ends
+    
+   
+    
     
     
     
@@ -73,46 +94,62 @@ class DbConnection: ObservableObject{
             if let error = error {
                 print(error.localizedDescription)
                 success = false
-               
+                
             }
-            if let _ = authResult{
-                print("Account successfully created")
-                success = true
+            if let authResult = authResult{
+                
+                /// UserData Object creates as a  unic Document  sor that user in Firebase Database and pushes
+                let newUserData = UserData(firstname: firstname, lastname: lastname)
+                do{
+                    try self.db.collection(self.USER_DATA_COLLECTION).document(authResult.user.uid).setData(from: newUserData)
+                    print("Account successfully created")
+                    success = true
+                    
+                }catch{
+                    print("Error: \(error.localizedDescription)")
+                }
+                
             }
             
         }
         return success
-       
+        
     }// Reg Ends
     
     
     
     
     
+    
+    
+    
     // * LOGIN USER *
-    func LoginUser(email: String, password: String) -> Bool{
+    func LoginUser(email: String, password: String, completion: @escaping (Bool) -> Void){
         
-        var success = false
-        auth.signIn(withEmail: email, password: password){ AuthDataResult, error in
+    
+        auth.signIn(withEmail: email, password: password){ [weak self] AuthDataResult, error in
             
             if let error = error{
-                print("Error logging in")
-                success = false
-            }
-            if let _ = AuthDataResult{
-                print("Logged in successfully")
-                success = true
+    
+                print("Error: \(error.localizedDescription)")
+                self?.currentUser = nil //
+                completion(false) /// user not register
+              
             }
             
+            else if let AuthDataResult = AuthDataResult{
+                    self?.currentUser = AuthDataResult.user
+                    print("Success loggged in with same user")
+                completion(true)
+                  
+                }
+        
+            
         }
-        return success
+       // return success
+        
         
     }// Log Ends
-    
-    
-    
-    
-    
     
     
     

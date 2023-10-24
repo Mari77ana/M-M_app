@@ -7,29 +7,73 @@
 
 
 import SwiftUI
+import FirebaseFirestore
 
 struct MainView : View {
-    
+    var db = Firestore.firestore()
+    @StateObject var myNoteClass = NoteClass()
+    @State var showPopUp = false
+    func startListeningToDb(){
+        
+         db.collection("Note 1").addSnapshotListener{
+             snapshot, error in
+             
+             if let error = error{
+                 print("error occured \(error.localizedDescription)")
+                 return
+             }
+             //if we havent received any error then the snapshot has received a value
+             guard let snapshot = snapshot else{return}
+             
+            
+             for document in snapshot.documents{
+                 let result = Result {
+                     try document.data(as: Note.self)
+                 }
+                 
+                 switch result {
+                 case .success(let note):
+                    
+                         self.myNoteClass.addEntry(entry: note)
+                    
+                         print(note.titel)
+                 case .failure(let error):
+                     print(error.localizedDescription)
+                 }
+             }
+         }
+     }
     
     var body: some View{
-        ZStack{
-            Color.black.ignoresSafeArea()
-            VStack{
-                HStack(spacing: 20){
-                    Image(systemName: "person").foregroundColor(.white)
-                 
-                    Text("Username").foregroundStyle(.white)
+        NavigationStack{
+            ZStack{
+                
+                VStack{
+                    HStack(spacing: 20){
+                        Image(systemName: "person")
+                        
+                        Text("Username")
+                        
+                        
+                        
+                    }.padding(.trailing,180)
+                    ZStack{
+                        Grid(noteClass: myNoteClass)
+                    }
+                    Button(action: {showPopUp = true}, label: {Text("Add")})
                     
-                    Text("Testing")
-                   
-                }.padding(.trailing,180)
-                
-                
-                Spacer()
-                
+                    if showPopUp{
+                        AddNote(note: myNoteClass,
+                                showPopUp: $showPopUp)
+                    }
+                    
+                    
+                    Spacer()
+                    
+                }
             }
-        }
-       
+            
+        }.onAppear(perform: startListeningToDb)
     }
 }
 

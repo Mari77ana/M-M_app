@@ -29,7 +29,7 @@ struct AddNotePhoto: View {
                 
                 VStack(spacing: 20) {
                     Button(action: {
-                        let newEntry = JournalEntry(title: txtTitle, description: txtDescription
+                        let newEntry =  JournalEntry(title: txtTitle, description: txtDescription
                         )
                         journal.addEntry(entry: newEntry)
                         showPopUp = false

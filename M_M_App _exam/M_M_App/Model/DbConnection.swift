@@ -25,7 +25,7 @@ class DbConnection: ObservableObject{
     // * App Starts Here *
     init() {
         
-        auth.addStateDidChangeListener { [self] auth, user in
+        auth.addStateDidChangeListener { auth, user in
             
             if let user = user {
                 
@@ -115,6 +115,15 @@ class DbConnection: ObservableObject{
         return success
         
     }// Reg Ends
+    
+    func signOut() {
+        do {
+            try auth.signOut()
+        } catch {
+            print("Error signing out")
+        }
+
+    }
     
     
     

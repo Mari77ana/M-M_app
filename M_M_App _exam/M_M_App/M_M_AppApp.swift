@@ -30,9 +30,7 @@ struct M_M_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-        LoginView(db: DbConnection())
-           //ContentView()
-          //RegisterView(db: DbConnection())
+           ContentView()
         }
     }
 }

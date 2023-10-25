@@ -15,7 +15,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        if let user = db.currentUser{
+        if let user = db.currentUser {
             NavigationStack{
                 VStack{
                     MainView()

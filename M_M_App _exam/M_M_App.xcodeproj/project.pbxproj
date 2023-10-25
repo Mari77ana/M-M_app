@@ -27,6 +27,7 @@
 		078065702AE5634300D99B49 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780656F2AE5634300D99B49 /* AlertView.swift */; };
 		078065722AE6656C00D99B49 /* AlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078065712AE6656C00D99B49 /* AlertViewModifier.swift */; };
 		07B1187C2AE3EB6200EBAF77 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1187B2AE3EB6200EBAF77 /* UserData.swift */; };
+		07F76D7F2AE94653008280CD /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F76D7E2AE94653008280CD /* SplashScreenView.swift */; };
 		49EF4E822AE7BDAE00851343 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		49EF4E862AE7F36200851343 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E852AE7F36200851343 /* Grid.swift */; };
 		49EF4E882AE7F3C500851343 /* NoteClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E872AE7F3C500851343 /* NoteClass.swift */; };
@@ -73,6 +74,7 @@
 		0780656F2AE5634300D99B49 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		078065712AE6656C00D99B49 /* AlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModifier.swift; sourceTree = "<group>"; };
 		07B1187B2AE3EB6200EBAF77 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		07F76D7E2AE94653008280CD /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		49EF4E852AE7F36200851343 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		49EF4E872AE7F3C500851343 /* NoteClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteClass.swift; sourceTree = "<group>"; };
 		49EF4E892AE7F44700851343 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				07410CAA2AE2A3E500E71844 /* LoginView.swift */,
 				0756AD802ADAEF630092F7FF /* RegisterView.swift */,
+				07F76D7E2AE94653008280CD /* SplashScreenView.swift */,
 			);
 			path = UnAuthenticated;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				49EF4E8E2AE7F5FA00851343 /* AddNote.swift in Sources */,
 				0756AD832ADAFBC90092F7FF /* ProfileView.swift in Sources */,
 				0756AD432ADAC3720092F7FF /* M_M_AppApp.swift in Sources */,
+				07F76D7F2AE94653008280CD /* SplashScreenView.swift in Sources */,
 				49EF4E8A2AE7F44700851343 /* Note.swift in Sources */,
 				07B1187C2AE3EB6200EBAF77 /* UserData.swift in Sources */,
 				0756AD7C2ADAEAA50092F7FF /* User.swift in Sources */,

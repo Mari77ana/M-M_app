@@ -18,7 +18,7 @@ struct ContentView: View {
         if let user = db.currentUser {
             NavigationStack{
                 VStack{
-                    MainView()
+                    MainView(dbConnection: DbConnection())
                 }
             }
             

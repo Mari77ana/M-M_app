@@ -13,6 +13,8 @@ struct MainView : View {
     var db = Firestore.firestore()
     @StateObject var myNoteClass = NoteClass()
     @State var showPopUp = false
+    @ObservedObject var dbConnection: DbConnection
+    
     func startListeningToDb(){
         
          db.collection("Note 1").addSnapshotListener{
@@ -60,12 +62,18 @@ struct MainView : View {
                     ZStack{
                         Grid(noteClass: myNoteClass)
                     }
-                    Button(action: {showPopUp = true}, label: {Text("Add")})
+                    Button(action: {showPopUp = true}, label: {Text("Add")}).padding()
                     
                     if showPopUp{
                         AddNote(note: myNoteClass,
                                 showPopUp: $showPopUp)
                     }
+                    
+                    
+                    Button(action: {
+                        dbConnection.signOut()
+                        
+                    }, label: {Text ("Log out")})
                     
                     
                     Spacer()
@@ -80,7 +88,7 @@ struct MainView : View {
 struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
-        MainView()
+        MainView(dbConnection: DbConnection())
     }
     
 }

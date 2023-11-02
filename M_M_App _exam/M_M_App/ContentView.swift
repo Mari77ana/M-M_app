@@ -11,9 +11,10 @@ import FirebaseFirestore
 struct ContentView: View {
     
    @StateObject var db = DbConnection()
-    
+    // Börja från SplashScreen
     
     var body: some View {
+        
         
         if let user = db.currentUser {
             NavigationStack{
@@ -25,7 +26,8 @@ struct ContentView: View {
             
         } else{
             NavigationStack{
-                LoginView(db: db)
+              //  LoginView(db: db)
+                SplashScreenView()
             }
            
         }

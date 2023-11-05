@@ -26,4 +26,5 @@ class NoteClass:ObservableObject{
     func deleteEntry(index: Int ){
         noteEntry.remove(at: index)
     }
+    
 }

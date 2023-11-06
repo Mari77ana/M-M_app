@@ -14,6 +14,27 @@ struct ViewNotePhoto: View {
     var body: some View {
         Text(entry.titel)
         Text(entry.description)
+        
+        //display image
+        if let imageURL = entry.imageURL, let url = URL(string: imageURL){
+            AsyncImage(url: url) {
+                phase in
+                switch phase {
+                case .success(let image):
+                    image.resizable()
+                        .scaledToFit()
+                case .failure:
+                    Text("Unable to load")
+                case .empty:
+                    ProgressView()
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .frame(maxWidth: 300,maxHeight: 300)
+        }else{
+            Text("No image avaible")
+        }
     }
 }
 

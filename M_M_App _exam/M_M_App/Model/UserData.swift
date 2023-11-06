@@ -14,6 +14,7 @@ struct UserData: Codable{
     @DocumentID var id: String?
     var firstname: String
     var lastname: String
+    var notes: [Note]
   
     
     

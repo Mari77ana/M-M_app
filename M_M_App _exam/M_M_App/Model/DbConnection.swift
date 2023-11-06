@@ -91,7 +91,7 @@ class DbConnection: ObservableObject{
     
     
     // * REGISTER USER *
-    func RegisterUser(firstname: String, lastname: String, email: String, password: String) -> Bool{
+    func RegisterUser(firstname: String, lastname: String, email: String, password: String, notes: [Note]) -> Bool{
         
         var success = false
         auth.createUser(withEmail: email, password: password) { authResult, error in

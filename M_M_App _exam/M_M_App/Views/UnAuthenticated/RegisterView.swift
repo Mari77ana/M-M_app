@@ -56,7 +56,7 @@ struct RegisterView: View {
                         if !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !password.isEmpty && password == comfirmPassword {
                             
                             // Creates Account
-                            let isSuccess = db.RegisterUser(firstname: firstname, lastname: lastname, email: email, password: password)
+                            let isSuccess = db.RegisterUser(firstname: firstname, lastname: lastname, email: email, password: password, notes: [])
                             if !isSuccess {
                                 print("Faild to create account")
                             }

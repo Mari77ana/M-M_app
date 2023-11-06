@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+
+struct AdviceResponse: Codable {
+   
+    let slip: Advice
+    
+}
+
+
+struct Advice: Codable {
+    
+    var id: Int
+    var advice: String
+}

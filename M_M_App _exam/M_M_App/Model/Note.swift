@@ -13,5 +13,6 @@ struct Note: Codable, Identifiable {
     @DocumentID var id: String?
     var titel: String
     var description: String
+    var imageURL: String?
     
 }

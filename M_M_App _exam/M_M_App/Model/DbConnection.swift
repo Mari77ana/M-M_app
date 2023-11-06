@@ -7,9 +7,14 @@
 
 import Foundation
 import Firebase
+import SwiftUI
+import FirebaseStorage
+
 
 
 class DbConnection: ObservableObject{
+    
+    
     
     var db = Firestore.firestore()
     var auth = Auth.auth()
@@ -99,7 +104,7 @@ class DbConnection: ObservableObject{
             if let authResult = authResult{
                 
                 /// UserData Object creates as a  unic Document  sor that user in Firebase Database and pushes
-                let newUserData = UserData(firstname: firstname, lastname: lastname)
+                let newUserData = UserData(firstname: firstname, lastname: lastname, notes: [])
                 do{
                     try self.db.collection(self.USER_DATA_COLLECTION).document(authResult.user.uid).setData(from: newUserData)
                     print("Account successfully created")
@@ -157,8 +162,11 @@ class DbConnection: ObservableObject{
         }
        // return success
         
-        
+       
     }// Log Ends
+    
+    
+
     
     
     

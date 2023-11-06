@@ -12,10 +12,18 @@ import FirebaseFirestore
 struct AddNote: View {
     var db = Firestore.firestore()
     @State var notes = [Note]()
+    
     @State var txtTitel = ""
     @State var txtDescription = ""
+    @Environment(\.dismiss) var dismiss
+    
     @ObservedObject var note:NoteClass
-    @Binding var showPopUp: Bool
+        // @Binding var showPopUp: Bool
+    
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var selectedImage: UIImage?
+    @State private var isImagePickerDisplay = false
+    
     var body: some View {
         VStack {
             
@@ -27,15 +35,20 @@ struct AddNote: View {
                
                 let newNote = Note(titel: txtTitel, description: txtDescription)
                 note.addEntry(entry: newNote)
-                showPopUp = false
+              
+                //showPopUp = false
                 do{
                   
                    try db.collection("Note 1").addDocument(from: newNote)
+                    dismiss()
                    
                 } catch let error {
                         print(error.localizedDescription)
                 }
             }, label: {Text("Add note to DB")})
+            Button("Cancel"){
+                dismiss()
+            }
             
             
         }
@@ -45,6 +58,6 @@ struct AddNote: View {
 
 struct AddNote_Previews: PreviewProvider {
     static var previews: some View {
-        AddNote(note: NoteClass(),showPopUp: .constant(true))
+        AddNote(note: NoteClass())
     }
 }

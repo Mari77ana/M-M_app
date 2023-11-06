@@ -63,10 +63,11 @@ struct MainView : View {
                         Grid(noteClass: myNoteClass)
                     }
                     Button(action: {showPopUp = true}, label: {Text("Add")}).padding()
+                   
                     
                     if showPopUp{
-                        AddNote(note: myNoteClass,
-                                showPopUp: $showPopUp)
+                        AddNote(note: myNoteClass
+                                )
                     }
                     
                     
@@ -79,6 +80,7 @@ struct MainView : View {
                     Spacer()
                     
                 }
+                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)})
             }
             
         }.onAppear(perform: startListeningToDb)

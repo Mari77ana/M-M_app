@@ -39,6 +39,7 @@
 		49EF4E8A2AE7F44700851343 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E892AE7F44700851343 /* Note.swift */; };
 		49EF4E8C2AE7F48000851343 /* ViewNotePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E8B2AE7F48000851343 /* ViewNotePhoto.swift */; };
 		49EF4E8E2AE7F5FA00851343 /* AddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E8D2AE7F5FA00851343 /* AddNote.swift */; };
+		49F647BE2AFABF3D00ED7891 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F647BD2AFABF3D00ED7891 /* NotesViewModel.swift */; };
 		49FD51862ADFF89F004B1004 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FD51852ADFF89F004B1004 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		49EF4E892AE7F44700851343 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		49EF4E8B2AE7F48000851343 /* ViewNotePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotePhoto.swift; sourceTree = "<group>"; };
 		49EF4E8D2AE7F5FA00851343 /* AddNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNote.swift; sourceTree = "<group>"; };
+		49F647BD2AFABF3D00ED7891 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		49FD51852ADFF89F004B1004 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		49FD51892AE11619004B1004 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
 		49FD518D2AE1167C004B1004 /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		0756AD412ADAC3720092F7FF /* M_M_App */ = {
 			isa = PBXGroup;
 			children = (
+				49F647BC2AFABF2300ED7891 /* NotesVM */,
 				0780656A2AE560F300D99B49 /* Components */,
 				07B1187F2AE3EDCA00EBAF77 /* Authenticated */,
 				0756AD7D2ADAEE880092F7FF /* Views */,
@@ -272,6 +275,14 @@
 				49FD518D2AE1167C004B1004 /* JournalEntry.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		49F647BC2AFABF2300ED7891 /* NotesVM */ = {
+			isa = PBXGroup;
+			children = (
+				49F647BD2AFABF3D00ED7891 /* NotesViewModel.swift */,
+			);
+			path = NotesVM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F647BE2AFABF3D00ED7891 /* NotesViewModel.swift in Sources */,
 				0756AD452ADAC3720092F7FF /* ContentView.swift in Sources */,
 				49FD51862ADFF89F004B1004 /* MainView.swift in Sources */,
 				078065722AE6656C00D99B49 /* AlertViewModifier.swift in Sources */,

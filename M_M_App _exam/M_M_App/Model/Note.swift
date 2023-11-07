@@ -14,5 +14,4 @@ struct Note: Codable, Identifiable {
     var titel: String
     var description: String
     var imageURL: String?
-    
 }

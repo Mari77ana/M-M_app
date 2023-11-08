@@ -13,14 +13,14 @@ struct MainView : View {
     var db = Firestore.firestore()
     @StateObject var myNoteClass = NoteClass()
     @State var showPopUp = false
-    @ObservedObject var dbConnection: DbConnection
+    @EnvironmentObject var dbConnection: DbConnection
     
     func startListeningToDb(){
         
-         db.collection("Note 1").addSnapshotListener{
+         db.collection("user_data").addSnapshotListener{
              snapshot, error in
              
-             if let error = error{
+             if let error = error {
                  print("error occured \(error.localizedDescription)")
                  return
              }
@@ -80,7 +80,9 @@ struct MainView : View {
                     Spacer()
                     
                 }
-                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass, showPopUp: $showPopUp)})
+                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass, showPopUp: $showPopUp)
+                        .environmentObject(dbConnection)
+                })
             }
             
         }.onAppear(perform: startListeningToDb)
@@ -90,7 +92,7 @@ struct MainView : View {
 struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
-        MainView(dbConnection: DbConnection())
+        MainView().environmentObject(DbConnection())
     }
     
 }

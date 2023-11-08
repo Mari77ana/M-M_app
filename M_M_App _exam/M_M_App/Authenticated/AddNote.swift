@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 
 struct AddNote: View {
+    
     var db = Firestore.firestore()
     @State var notes = [Note]()
     
@@ -17,7 +18,10 @@ struct AddNote: View {
     
     @State var txtTitel = ""
     @State var txtDescription = ""
+    
+    @StateObject var NoteVM = NotesViewModel()
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var dbConnection: DbConnection
     
     @ObservedObject var note:NoteClass
         // @Binding var showPopUp: Bool
@@ -71,19 +75,35 @@ struct AddNote: View {
            Button(action: {
                
                var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
+               
                if let selectedImage = selectedImage{
+                   
                    uploadImage(selectedImage){result in
-                       switch result{
-                       case .success(let url):
-                           newNote.imageURL = url.absoluteString
-                           addNoteToFirestore(newNote)
-                       case .failure(let error):
-                           print(error.localizedDescription)
+                       DispatchQueue.main.async {
+                           switch result{
+                           case .success(let url):
+                               newNote.imageURL = url.absoluteString
+                               print("Image URL: \(url.absoluteString)")
+                               
+                               if let user = dbConnection.currentUser {
+                                   NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
+                                       print("Note added to firestore")
+                                       self.showPopUp = false
+                                   
+                               }
+                           case .failure(let error):
+                               print(error.localizedDescription)
+                           }
                        }
+                      
                        
                    }
                }else{
-                   addNoteToFirestore(newNote)
+                   if let user = dbConnection.currentUser{
+                       NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
+                       print("note ")
+                       self.showPopUp = false
+                   }
                }
               
           
@@ -105,5 +125,6 @@ struct AddNote: View {
 struct AddNote_Previews: PreviewProvider {
     static var previews: some View {
         AddNote(note: NoteClass(),showPopUp: .constant(true))
+            .environmentObject(DbConnection())
     }
 }

@@ -55,35 +55,39 @@ class DbConnection: ObservableObject{
     }
     
     
-    
-    func startListeningToDb(){
-        
+
+  func startListeningToDb(){
+
+
+
         guard let user = currentUser else{return}
-        
-        /// Listening only on the user id document , not the hole collection ,  use user.uid
+
+       /// Listening only on the user id document , not the hole collection ,  use user.uid
         dbListener = db.collection(self.USER_DATA_COLLECTION).document(user.uid).addSnapshotListener{
             snapshot, error in
-            
-            if let error = error {
-                print("Error occured \(error.localizedDescription)")
-                return
+
+           if let error = error {
+               print("Error occured \(error.localizedDescription)")
+               return
             }
             guard let documentSnapshot = snapshot else{return}
-            
+
             let result = Result{
                 try documentSnapshot.data(as: UserData.self)
             }
-            switch result{
-            case  .success(let UserData):
+           switch result{
+           case  .success(let UserData):
                 self.currentUserData = UserData
             case .failure(let error) :
                 print(error.localizedDescription)
             }
-            
-            
+
+
         }
-        
+
     }// startListening ends
+    
+ 
     
    
     
@@ -164,16 +168,5 @@ class DbConnection: ObservableObject{
         
        
     }// Log Ends
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

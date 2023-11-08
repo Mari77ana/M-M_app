@@ -17,9 +17,18 @@ class NoteClass:ObservableObject{
         return noteEntry
     }
     
-    func addEntry(entry: Note){
-        if !noteEntry.contains(where: { $0.id == entry.id }) {
-            noteEntry.append(entry)
+//    func addEntry(entry: Note){
+//        if !noteEntry.contains(where: { $0.id == entry.id }) {
+//            noteEntry.append(entry)
+//        }
+//    }
+    func addEntry(entry: Note) {
+        DispatchQueue.main.async {
+            if let index = self.noteEntry.firstIndex(where: { $0.id == entry.id }) {
+                self.noteEntry[index] = entry
+            } else {
+                self.noteEntry.append(entry)
+            }
         }
     }
     

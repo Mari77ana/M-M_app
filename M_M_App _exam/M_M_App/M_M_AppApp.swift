@@ -25,12 +25,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct M_M_AppApp: App {
+    @StateObject private var dbConnection = DbConnection()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
            ContentView()
+                .environmentObject(dbConnection)
         }
     }
 }

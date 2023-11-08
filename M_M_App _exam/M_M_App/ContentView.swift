@@ -19,15 +19,15 @@ struct ContentView: View {
         if let user = db.currentUser {
             NavigationStack{
                 VStack{
-                    MainView(dbConnection: DbConnection())
+                    MainView().environmentObject(DbConnection())
                 }
             }
             
             
         } else{
             NavigationStack{
-              //  LoginView(db: db)
-                SplashScreenView()
+                LoginView(db: db)
+               // SplashScreenView()
             }
            
         }

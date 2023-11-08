@@ -95,7 +95,7 @@ class DbConnection: ObservableObject{
     
     
     // * REGISTER USER *
-    func RegisterUser(firstname: String, lastname: String, email: String, password: String, notes: [Note]) -> Bool{
+    func RegisterUser(firstname: String, lastname: String, email: String, password: String) -> Bool{
         
         var success = false
         auth.createUser(withEmail: email, password: password) { authResult, error in
@@ -108,7 +108,7 @@ class DbConnection: ObservableObject{
             if let authResult = authResult{
                 
                 /// UserData Object creates as a  unic Document  sor that user in Firebase Database and pushes
-                let newUserData = UserData(firstname: firstname, lastname: lastname, notes: [])
+                let newUserData = UserData(firstname: firstname, lastname: lastname)
                 do{
                     try self.db.collection(self.USER_DATA_COLLECTION).document(authResult.user.uid).setData(from: newUserData)
                     print("Account successfully created")

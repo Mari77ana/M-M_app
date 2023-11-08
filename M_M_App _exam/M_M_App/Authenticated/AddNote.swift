@@ -26,16 +26,17 @@ struct AddNote: View {
     @ObservedObject var note:NoteClass
         // @Binding var showPopUp: Bool
     
+    @FocusState var isTitleFocused:Bool
+    @FocusState var isDescriptionFocused:Bool
+    
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
-    @Binding var showPopUp: Bool
     
     func addNoteToFirestore(_ note:Note){
         do{
             try db.collection("Note 1").addDocument(from: note)
             self.notes.append(note)
-            showPopUp = false
             
         } catch _ {
             print("error")
@@ -44,9 +45,9 @@ struct AddNote: View {
         
         VStack {
             
-           TextField("add titel", text: $txtTitel)
+            TextField("add titel", text: $txtTitel).focused($isTitleFocused)
             
-           TextField("add description", text: $txtDescription)
+            TextField("add description", text: $txtDescription).focused($isDescriptionFocused)
             
             Button(action: {
                 self.showSheet = true
@@ -73,23 +74,23 @@ struct AddNote: View {
             
             
            Button(action: {
-               
-               var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
-               
                if let selectedImage = selectedImage{
                    
                    uploadImage(selectedImage){result in
+                       
                        DispatchQueue.main.async {
+                           
                            switch result{
+                               
                            case .success(let url):
-                               newNote.imageURL = url.absoluteString
+                               
+                               var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: url.absoluteString)
+                               
                                print("Image URL: \(url.absoluteString)")
                                
                                if let user = dbConnection.currentUser {
                                    NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                                        print("Note added to firestore")
-                                       self.showPopUp = false
-                                   
                                }
                            case .failure(let error):
                                print(error.localizedDescription)
@@ -100,9 +101,10 @@ struct AddNote: View {
                    }
                }else{
                    if let user = dbConnection.currentUser{
+                       var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
                        NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                        print("note ")
-                       self.showPopUp = false
+
                    }
                }
               
@@ -115,16 +117,18 @@ struct AddNote: View {
             
         }
         .navigationTitle("Demo")
-            .sheet(isPresented: self.$isImagePickerDisplay){
+        .sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
+            self.isDescriptionFocused = false
+        }){
                 ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
-            }
+        }
     
     }
 }
 
 struct AddNote_Previews: PreviewProvider {
     static var previews: some View {
-        AddNote(note: NoteClass(),showPopUp: .constant(true))
+        AddNote(note: NoteClass())
             .environmentObject(DbConnection())
     }
 }

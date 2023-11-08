@@ -68,8 +68,7 @@ struct MainView : View {
                    
                     
                     if showPopUp{
-                        AddNote(note: myNoteClass, showPopUp: $showPopUp
-                                )
+                        AddNote(note: myNoteClass)
                     }
                     
                     
@@ -82,7 +81,7 @@ struct MainView : View {
                     Spacer()
                     
                 }
-                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass, showPopUp: $showPopUp)
+                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
                         .environmentObject(dbConnection)
                 })
             }

@@ -16,8 +16,10 @@ struct MainView : View {
     @EnvironmentObject var dbConnection: DbConnection
     
     func startListeningToDb(){
+    
+        guard let currentUser = dbConnection.currentUser else {return}
         
-         db.collection("user_data").addSnapshotListener{
+        db.collection("user_data").document(currentUser.uid).collection("notes").addSnapshotListener{
              snapshot, error in
              
              if let error = error {

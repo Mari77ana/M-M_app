@@ -9,15 +9,66 @@ import XCTest
 @testable import M_M_App
 
 final class M_M_AppTests: XCTestCase {
+    
+    var sut: ApiCall!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = ApiCall()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
+    /// Mark: OWN TESTING FUNCTION
+    func testFetchAdvice() async throws {
+        
+        do{
+            var endpoint = "anotherTestOfHttpsAdress"
+            try await sut.fetchAdvice(endpoint: endpoint)
+            XCTFail("Error did not throw it should have")
+            
+        }catch{
+            
+        }
+    }
+    
+    
+    func apiTest() async throws {
+       
+        do {
+            var endpoint = "https://api.adviceslip.com/advice"
+            try await sut.fetchAdvice(endpoint: endpoint)
+            
+        }catch{
+            
+            XCTFail("Error did not throw when it should have")
+        }
+    }
+    
+    
+    
+    func apiEmtyTest() async throws {
+        
+        do{
+            let endpoint = "https://api.adviceslip.com/advice"
+            let advice = try await sut.fetchAdvice(endpoint: endpoint)
+            XCTAssertFalse(advice.isEmpty, "Advice should not be empty")
+            
+        }catch{
+            
+            XCTFail("An error occurred")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

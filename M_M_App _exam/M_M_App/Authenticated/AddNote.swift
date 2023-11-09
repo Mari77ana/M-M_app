@@ -63,7 +63,7 @@ struct AddNote: View {
                 
                 
             
-            TextEditor( text: $txtDescription)
+            TextField("Add your description or generate", text: $txtDescription).focused($isDescriptionFocused)
                 .frame(width: 300, height: 150)
                 .background(Color(red: 0.9, green: 0.9, blue: 0.9, opacity: 1.0))
                 .cornerRadius(8)

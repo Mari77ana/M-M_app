@@ -80,19 +80,20 @@ struct AddNote: View {
                 Button(action: {
                     
                     Task{
-                        await viewModel.fetchAdvice()
+                        do{
+                            let fetchedAdvice = try await viewModel.api.fetchAdvice(endpoint: viewModel.adviceEndpoint)
+                            txtDescription = fetchedAdvice
+                        } catch{
+                            txtDescription = "Failed to fetch advice"
+                            print(error.localizedDescription)
+                        }
                     }
-                    
-                    
+                      
                 }, label: {
                     Text("Generate Decription").padding()
                     
                 })
-                .onChange(of: viewModel.advice){
-                    newAdvice in
-                    self.txtDescription = newAdvice ?? "No Advice"
-                    
-                }
+                
                 
                 Button(action: {
                     if let selectedImage = selectedImage{
@@ -165,8 +166,10 @@ struct AddNote: View {
                     self.isImagePickerDisplay.toggle()
                 }, label: {Text("Camera")})
             })
-            .onChange(of: selectedImage){ _ in
-            txtDescription = "" }
+        .onChange(of: selectedImage){ _ in
+           txtDescription = ""
+            txtTitel = ""
+        }
             // Display the selected image
                            if let selectedImage = selectedImage {
                                Image(uiImage: selectedImage)

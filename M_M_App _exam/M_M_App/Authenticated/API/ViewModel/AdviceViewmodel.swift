@@ -21,7 +21,7 @@ class AdviceViewmodel: ObservableObject {
         
         /// Task = Makes sure that the call value is updated from Main Thread (via operators like recive),
         ///  DispatchQueue in need to make sure it comes from main Thread, (because i used @Published)
-        Task{
+       
             
             do{
                 let myAdvice = try await api.fetchAdvice(endpoint: adviceEndpoint)
@@ -43,7 +43,7 @@ class AdviceViewmodel: ObservableObject {
             }
             
             
-        }
+        
         
         
         

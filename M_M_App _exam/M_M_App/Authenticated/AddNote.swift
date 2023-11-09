@@ -12,6 +12,9 @@ import FirebaseFirestore
 struct AddNote: View {
     
     var db = Firestore.firestore()
+    
+    @ObservedObject var viewModel = AdviceViewmodel()
+   
     @State var notes = [Note]()
     
     @State var showSheet:Bool = false
@@ -33,6 +36,10 @@ struct AddNote: View {
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
     
+    
+    
+    
+    
     func addNoteToFirestore(_ note:Note){
         do{
             try db.collection("Note 1").addDocument(from: note)
@@ -41,23 +48,41 @@ struct AddNote: View {
         } catch _ {
             print("error")
         }}
+    
+    
+    
+    
     var body: some View {
         
         VStack {
             
-            TextField("add titel", text: $txtTitel).focused($isTitleFocused)
+            TextField("Add titel", text: $txtTitel).focused($isTitleFocused)
+                .padding()
+                .frame(width: 300, height: 40)
+                .border(Color.gray, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                
+                
             
-            TextField("add description", text: $txtDescription).focused($isDescriptionFocused)
+            TextEditor( text: $txtDescription)
+                .frame(width: 300, height: 150)
+                .background(Color(red: 0.9, green: 0.9, blue: 0.9, opacity: 1.0))
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray, lineWidth: 1)
+                ).padding()
             
+            /// Add Photo
             Button(action: {
                 self.showSheet = true
             }, label: {Text("Add photo")}).padding().confirmationDialog("Select Photo", isPresented: $showSheet, actions: {
                 
+                /// Photo Library
                 Button(action: {//self.showImagePicker = true
                     self.sourceType = .photoLibrary
                     self.isImagePickerDisplay.toggle()
                 }, label: {Text("Photo Library")})
                 
+                /// Camera
                 Button(action: {
                     self.sourceType = .camera
                     self.isImagePickerDisplay.toggle()
@@ -70,6 +95,23 @@ struct AddNote: View {
                                    .scaledToFit()
                                    .frame(maxWidth: 300, maxHeight: 300)
                            }
+            
+            
+            ///Fetcha Advice API
+            Button(action: {
+                
+                Task{
+                    await viewModel.fetchAdvice()
+                }
+                
+                
+            }, label: {
+                Text("Generate Decription").padding()
+            })
+            .onChange(of: viewModel.advice){
+                newAdvice in
+                self.txtDescription = newAdvice ?? "No Advice"
+            }
             
             
             

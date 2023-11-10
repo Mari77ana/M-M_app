@@ -58,14 +58,14 @@ struct Grid: View {
     @ObservedObject var noteClass: NoteClass
     
     let columns: [GridItem] = [
-        GridItem(.fixed(50), spacing: 30, alignment: nil),
-        GridItem(.fixed(50), spacing: 30, alignment: nil),
-        GridItem(.fixed(50), spacing: 30, alignment: nil)
+        GridItem(.fixed(50), spacing: 80, alignment: nil),
+        GridItem(.fixed(50), spacing: 80, alignment: nil),
+        GridItem(.fixed(50), spacing: 80, alignment: nil)
     ]
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, alignment: .center, spacing: 15) {
+            LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
                 ForEach(noteClass.getNotes()) { entry in
                     if let imageURL = entry.imageURL, let url = URL(string: imageURL) {
                         // Use AsyncImage to load and display the image
@@ -75,7 +75,7 @@ struct Grid: View {
                             } placeholder: {
                                 ProgressView()
                             }
-                            .frame(width: 70, height: 80)
+                            .frame(width: 120, height: 120)
                             .cornerRadius(8)
                         }
                     } else {
@@ -83,7 +83,7 @@ struct Grid: View {
                         NavigationLink(destination: ViewNotePhoto(entry: entry, journal: noteClass)) {
                             Rectangle()
                                 .fill(Color.gray)
-                                .frame(width: 70, height: 80)
+                                .frame(width: 120, height: 120)
                                 .cornerRadius(8)
                         }
                     }

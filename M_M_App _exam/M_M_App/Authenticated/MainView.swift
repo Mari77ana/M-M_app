@@ -10,12 +10,17 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MainView : View {
-    var db = Firestore.firestore()
-    @StateObject var myNoteClass = NoteClass()
-    @State var showPopUp = false
-    @EnvironmentObject var dbConnection: DbConnection
     
-    func startListeningToDb(){
+    var db = Firestore.firestore()
+    
+    @StateObject var myNoteClass = NoteClass()
+    @EnvironmentObject var dbConnection: DbConnection
+    @EnvironmentObject var themeColor: ThemeColor
+    
+    @State var showPopUp = false
+  
+    
+    func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
     
         guard let currentUser = dbConnection.currentUser else {return}
         
@@ -51,16 +56,20 @@ struct MainView : View {
     var body: some View{
         NavigationStack{
             ZStack{
+                themeColor.colorSchemeMode().ignoresSafeArea()
+                themeColor.themeFormCircle()
+                themeColor.themeFormRoundenRectangle()
+                
                 
                 VStack{
-                    HStack(spacing: 20){
+                    HStack(spacing: 10){ ///20 var innan
                         Image(systemName: "person")
                         
                         Text(dbConnection.currentUserData?.firstname ?? "username")
                         
                         
                         
-                    }.padding(.trailing,180)
+                    }.padding(.trailing,250) ///180, flytttade in den lite
                     Spacer()
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
@@ -95,7 +104,9 @@ struct MainView : View {
 struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
-        MainView().environmentObject(DbConnection())
+        MainView()
+            .environmentObject(DbConnection())
+            .environmentObject(ThemeColor())
     }
     
 }

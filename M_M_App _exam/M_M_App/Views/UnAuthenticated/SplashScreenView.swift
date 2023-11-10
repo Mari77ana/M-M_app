@@ -14,12 +14,23 @@ struct SplashScreenView: View {
     @State var opacity: Double = 0.6
     @State var isActive = false
     
+    @State var currentUser: UserData? //= UserData(firstname: "", lastname: "")
+    
     
     var body: some View {
         
         if isActive {
-            /// Navigate to LoginView
-            LoginView(db: DbConnection())
+           
+            /// if currentUser != nil
+            if currentUser?.id != nil {
+                /// Navigate to MainView
+                MainView()
+            }else{
+                /// Else to LoginView
+                LoginView(db: DbConnection())
+            }
+           
+           
         }else {
             
             VStack{

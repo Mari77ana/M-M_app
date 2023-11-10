@@ -10,7 +10,8 @@ import FirebaseFirestore
 
 struct ContentView: View {
     
-   @StateObject var db = DbConnection()
+    @StateObject var db = DbConnection()
+    @State var showSplashScreen = true
     // Börja från SplashScreen
     
     var body: some View {
@@ -18,30 +19,42 @@ struct ContentView: View {
         
         if let user = db.currentUser {
             NavigationStack{
+                
                 VStack{
-                    MainView().environmentObject(DbConnection())
+                    /// Börja fr SplashScreen
+                    if let user = db.currentUser{
+                        if showSplashScreen{
+                            SplashScreenView()
+                            /// onAppear in need to show SplashScreen again for 0.5 sek
+                                .onAppear{
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ){
+                                        showSplashScreen = false
+                                    }
+                                }
+                        }else{
+                            MainView().environmentObject(db)
+                        }
+                    }else{
+                        NavigationStack{
+                            LoginView(db: db)
+                        }
+                    }
+                    
                 }
             }
             
             
-        } else{
+        }
+        else{
             NavigationStack{
                 LoginView(db: db)
-               // SplashScreenView()
+                // SplashScreenView()
             }
-           
+            
+            
+            
         }
-            
-       
-            
-             
-            
-            
-        
-        
-        
     }
-    
     
 }
     struct ContentView_Previews: PreviewProvider {

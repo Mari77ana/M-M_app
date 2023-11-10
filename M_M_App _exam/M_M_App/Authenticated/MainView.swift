@@ -61,9 +61,11 @@ struct MainView : View {
                         
                         
                     }.padding(.trailing,180)
+                    Spacer()
                     ZStack{
-                        Grid(noteClass: myNoteClass)
+                        Grid(noteClass: myNoteClass).frame(height: 380)
                     }
+                    Spacer()
                     Button(action: {showPopUp = true}, label: {Text("Add")}).padding()
                    
                     
@@ -78,7 +80,7 @@ struct MainView : View {
                     }, label: {Text ("Log out")})
                     
                     
-                    Spacer()
+               
                     
                 }
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)

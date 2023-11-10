@@ -66,7 +66,7 @@ struct Grid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
-                ForEach(noteClass.getNotes()) { entry in
+                ForEach( noteClass.getNotes(), id: \.id) { entry in
                     if let imageURL = entry.imageURL, let url = URL(string: imageURL) {
                         // Use AsyncImage to load and display the image
                         NavigationLink(destination: ViewNotePhoto(entry: entry, journal: noteClass)) {

@@ -12,8 +12,9 @@ struct ViewNotePhoto: View {
     @ObservedObject var journal: NoteClass
     
     var body: some View {
-        Text(entry.titel)
-        Text(entry.description)
+       
+        Text(entry.titel).padding()
+       
         
         //display image
         if let imageURL = entry.imageURL, let url = URL(string: imageURL){
@@ -22,7 +23,8 @@ struct ViewNotePhoto: View {
                 switch phase {
                 case .success(let image):
                     image.resizable()
-                        .scaledToFit()
+                        //.scaledToFit()
+                        .frame(width:  380, height: 400).padding(15)
                 case .failure:
                     Text("Unable to load")
                 case .empty:
@@ -31,7 +33,10 @@ struct ViewNotePhoto: View {
                     EmptyView()
                 }
             }
-            .frame(maxWidth: 300,maxHeight: 300)
+          
+            Text(entry.description).padding()
+            Spacer()
+            
         }else{
             Text("No image avaible")
         }

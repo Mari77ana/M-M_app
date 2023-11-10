@@ -36,8 +36,8 @@ struct ContentView: View {
                         }
                     }else{
                         NavigationStack{
-                            //LoginView(db: db)
-                            SplashScreenView()
+                            LoginView(db: db)
+                            //SplashScreenView()
                         }
                     }
                     
@@ -48,8 +48,8 @@ struct ContentView: View {
         }
         else{
             NavigationStack{
-               // LoginView(db: db)
-                SplashScreenView()
+                LoginView(db: db)
+               // SplashScreenView()
             }
             
             

@@ -56,7 +56,7 @@ struct MainView : View {
                     HStack(spacing: 20){
                         Image(systemName: "person")
                         
-                        Text("Username")
+                        Text(dbConnection.currentUserData?.firstname ?? "username")
                         
                         
                         

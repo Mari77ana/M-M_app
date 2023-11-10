@@ -27,7 +27,7 @@ struct ContentView: View {
                             SplashScreenView()
                             /// onAppear in need to show SplashScreen again for 0.5 sek
                                 .onAppear{
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ){
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 ){
                                         showSplashScreen = false
                                     }
                                 }
@@ -36,7 +36,8 @@ struct ContentView: View {
                         }
                     }else{
                         NavigationStack{
-                            LoginView(db: db)
+                            //LoginView(db: db)
+                            SplashScreenView()
                         }
                     }
                     
@@ -47,8 +48,8 @@ struct ContentView: View {
         }
         else{
             NavigationStack{
-                LoginView(db: db)
-                // SplashScreenView()
+               // LoginView(db: db)
+                SplashScreenView()
             }
             
             

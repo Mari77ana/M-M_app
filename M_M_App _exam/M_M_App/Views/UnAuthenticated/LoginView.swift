@@ -11,6 +11,7 @@ import FirebaseFirestore
 struct LoginView: View {
     
     @ObservedObject var db: DbConnection
+    @EnvironmentObject var themeColor: ThemeColor
     
     //var db = Firestore.firestore()
     @State var email = ""
@@ -18,6 +19,8 @@ struct LoginView: View {
     @State private var showAlert = false
     @State var alertMessage = ""
     @State var showMainView = false
+    
+   
     
     
     
@@ -37,72 +40,79 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack{
-            
-            VStack {
-                Text("LOGIN").font(.largeTitle)
-                Image(systemName: "person")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .foregroundStyle(.green)
-                    .padding(30)
-                Spacer()
+            ZStack{
+                themeColor.colorSchemeMode()
+                themeColor.themeFormCircle()
+                themeColor.themeFormRoundenRectangle()
                 
-                VStack(spacing: 45){
-                    TextField("Enter your email", text: $email)
-                        .padding(10)
-                        .frame(width: 350, height: 40)
-                        .border(.black)
-                    
-                    SecureField("Enter your password", text: $password)
-                        .padding(10)
-                        .frame(width: 350, height: 40)
-                        .border(.black)
-                    
-                    
-                    
-                    Button(action: {
-                        loginSuccess(email: email, password: password) { success in
-                            if success {
-                                print("User ID: \(db.currentUser?.uid ?? "No user ID")")
-                                print("ONBOARD")
-                                alertMessage = "Onboard"
-                                showAlert = true
-                            } else {
-                                DispatchQueue.main.async {
-                                    print("Not onboard")
-                                    alertMessage = "Failed login"
-                                    showAlert = true
-                                }
-                            }
-                        }
-                    }, label: {
-                        Text("Login")
-                            .frame(width: 350, height: 45)
-                            .background(.indigo)
-                            .foregroundStyle(.white)
-                            .cornerRadius(30)
-                    })
+                VStack {
+                    Text("LOGIN")
+                        .font(.largeTitle)
+                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                    Image(systemName: "person")
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .foregroundStyle(.green)
+                        .padding(30)
                     Spacer()
                     
-                    NavigationLink(destination: {
-                                          RegisterView(db: db)
-                                      }, label: {
-                                          HStack(spacing: 10){
-                                              Text("Don't have an account?")
-                                              Text("Sign Up!").bold()
-                                          }
-                                      })
+                    VStack(spacing: 45){
+                        TextField("Enter your email", text: $email)
+                            .padding(10)
+                            .frame(width: 350, height: 40)
+                            .border(.black)
+                        
+                        SecureField("Enter your password", text: $password)
+                            .padding(10)
+                            .frame(width: 350, height: 40)
+                            .border(.black)
+                        
+                        
+                        
+                        Button(action: {
+                            loginSuccess(email: email, password: password) { success in
+                                if success {
+                                    print("User ID: \(db.currentUser?.uid ?? "No user ID")")
+                                    print("ONBOARD")
+                                    alertMessage = "Onboard"
+                                    showAlert = true
+                                } else {
+                                    DispatchQueue.main.async {
+                                        print("Not onboard")
+                                        alertMessage = "Failed login"
+                                        showAlert = true
+                                    }
+                                }
+                            }
+                        }, label: {
+                            Text("Login")
+                                .frame(width: 350, height: 45)
+                                .background(.indigo)
+                                .foregroundStyle(.white)
+                                .cornerRadius(30)
+                        })
+                        Spacer()
+                        
+                        NavigationLink(destination: {
+                            RegisterView(db: db)
+                        }, label: {
+                            HStack(spacing: 10){
+                                Text("Don't have an account?")
+                                Text("Sign Up!").bold()
+                            }
+                        })
+                        
+                        
+                    }.padding(60)
                     
                     
-                    
-                    
-                }.padding(60)
+                }.padding(.top, 70)
                 
-            }.padding(.top, 70)
+                
+            }
+            .customAlert(isPresented: $showAlert, title: "Alert", message: alertMessage)
             
-        }
-        .customAlert(isPresented: $showAlert, title: "Alert", message: alertMessage)
-       
+        }/// ZStack Ends
             
     }// Body Ends
     
@@ -117,7 +127,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     
     static var previews: some View {
-       LoginView(db: DbConnection())
+        LoginView(db: DbConnection()).environmentObject(ThemeColor())
     }
     
 }

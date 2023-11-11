@@ -75,10 +75,19 @@ struct SplashScreenView: View {
     @StateObject var db = DbConnection()
     @EnvironmentObject var themeColor: ThemeColor
     
-    @State private var isActive = false
-    @State private var rotationAngle: Double = 0.0
-    @State private var size: Double = 0.1
-    @State private var opacity: Double = 0.6
+
+    
+
+
+    @State var rotationAngle: Double = 0.0
+    @State var size: Double = 0.1
+    @State var opacity: Double = 0.6
+    @State var isActive = false
+    
+    @State var currentUser: UserData? //= UserData(firstname: "", lastname: "")
+    
+    @EnvironmentObject var themeColor: ThemeColor
+    /// kanske jag behöver colorSchemeMode
 
     var body: some View {
         VStack {
@@ -124,3 +133,15 @@ struct SplashScreenView: View {
         }
     }
 }
+
+
+
+
+struct SplashScreenView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        SplashScreenView().environmentObject(ThemeColor())
+    }
+    
+}
+

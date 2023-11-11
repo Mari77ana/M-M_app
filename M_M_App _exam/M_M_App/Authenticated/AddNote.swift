@@ -113,9 +113,11 @@ struct AddNote: View {
                                     if let user = dbConnection.currentUser {
                                         NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                                             print("Note added to firestore")
+                                        dismiss()
                                     }
                                 case .failure(let error):
                                     print(error.localizedDescription)
+                                    dismiss()
                                 }
                             }
                            
@@ -127,6 +129,7 @@ struct AddNote: View {
                             var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
                             NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                             print("note ")
+                            dismiss()
 
                         }
                     }
@@ -194,7 +197,6 @@ struct AddNote: View {
             
             
         }
-        .navigationTitle("Demo")
         .sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
             self.isDescriptionFocused = false
         }){

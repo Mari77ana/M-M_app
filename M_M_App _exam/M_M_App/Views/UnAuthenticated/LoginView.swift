@@ -46,8 +46,9 @@ struct LoginView: View {
                 themeColor.themeFormRoundenRectangle()
                 
                 VStack {
-                    Text("LOGIN")
+                    Text("LensLog")
                         .font(.largeTitle)
+                        .italic()
                         .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                     Image(systemName: "person")
                         .resizable()
@@ -58,6 +59,7 @@ struct LoginView: View {
                     
                     VStack(spacing: 45){
                         TextField("Enter your email", text: $email)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
@@ -68,7 +70,7 @@ struct LoginView: View {
                             .border(.black)
                         
                         
-                        
+                        // Login Button
                         Button(action: {
                             loginSuccess(email: email, password: password) { success in
                                 if success {
@@ -93,18 +95,19 @@ struct LoginView: View {
                         })
                         Spacer()
                         
+                        /// Go to Register
                         NavigationLink(destination: {
                             RegisterView(db: db)
                         }, label: {
                             HStack(spacing: 10){
                                 Text("Don't have an account?")
+                                    .foregroundStyle(.indigo)
                                 Text("Sign Up!").bold()
+                                    .foregroundStyle(.indigo)
                             }
                         })
                         
-                        
                     }.padding(60)
-                    
                     
                 }.padding(.top, 70)
                 

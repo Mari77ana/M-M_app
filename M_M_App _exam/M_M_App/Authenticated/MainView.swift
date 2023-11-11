@@ -17,7 +17,8 @@ struct MainView : View {
     @EnvironmentObject var dbConnection: DbConnection
     @EnvironmentObject var themeColor: ThemeColor
     
-    @State var showPopUp = false
+    @State var showPopUp: Bool = false
+    @State var animate: Bool = false
     
   
     
@@ -59,13 +60,9 @@ struct MainView : View {
             ZStack{
            
                 themeColor.colorSchemeMode().ignoresSafeArea()
-           
-           
                 themeColor.themeFormCircle()
                 themeColor.themeFormRoundenRectangle()
            
-                
-               
                 VStack{
                     Image("Frame 8-2")
                         .resizable()
@@ -85,13 +82,20 @@ struct MainView : View {
                         
                         Spacer()
                         
+                        VStack(){
+                           
+                            
+                            
+                            Button(action: {
+                                themeColor.isDarkModeEnabled.toggle()
+                            }, label: {
+                                Text(themeColor.isDarkModeEnabled ? "LightMode" : "Dark Mode")
+                            })
                         
-                        Button(action: {
-                            themeColor.isDarkModeEnabled.toggle()
-                        }, label: {
-                            Text(themeColor.isDarkModeEnabled ? "LightMode" : "Dark Mode")
-                        })
-                       // .padding(.leading)
+                           // .padding(.leading)
+                            
+                        }
+                     
                       
                         
                         
@@ -100,26 +104,49 @@ struct MainView : View {
                     
                        
                     Spacer()
+                  
                     
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
                     }
-                    Spacer()
-                    Button(action: {showPopUp = true}, label: {Text("Add")}).padding()
+                    //Spacer()
+                   
                    
                     
                     if showPopUp{
                         AddNote(note: myNoteClass)
                     }
                     
-                    
+                    ///  Animatet Button
                     Button(action: {
-                        dbConnection.signOut()
+                        showPopUp = true}, label: {
+                          
+                            ZStack{
+                                Circle().frame(width: 70)
+                                    .foregroundColor(animate ? Color.indigo : Color.pink)
+                                Text("+").foregroundStyle(.black).font(.largeTitle)
+                            }
+                      
+                    }).padding(.bottom, 60)
+                        .padding(.horizontal, animate ? 30 : 50)
+                        //.scaleEffect(animate ? 1.4 : 1.0)
+                    
+                    
+            
+                    VStack{
+                        Image("Frame 8-2")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: UIScreen.main.bounds.width, height: -10)
+                    
+                            Button(action: {
+                                dbConnection.signOut()
+                                
+                            }, label: {Text ("Log out")})
                         
-                    }, label: {Text ("Log out")})
+                    }
                     
-                    
-               
+                  
                     
                 }
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
@@ -128,7 +155,29 @@ struct MainView : View {
             }
             
         }.onAppear(perform: startListeningToDb)
+        .onAppear(perform: addAnimation)
     }
+    
+    
+    func addAnimation(){
+        guard !animate else {return} /// In need because of onAppear so it wont toggle twice when switch screen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(
+            Animation
+                .easeInOut(duration: 2.0)
+                .repeatForever()
+            ) {
+                animate.toggle()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 
 struct MainView_Previews: PreviewProvider {

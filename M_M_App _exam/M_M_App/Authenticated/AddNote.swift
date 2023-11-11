@@ -14,6 +14,7 @@ struct AddNote: View {
     var db = Firestore.firestore()
     
     @ObservedObject var viewModel = AdviceViewmodel()
+    @EnvironmentObject var themeColor: ThemeColor
    
     @State var notes = [Note]()
     
@@ -54,6 +55,7 @@ struct AddNote: View {
     
    
     var body: some View {
+
         
         VStack {
             
@@ -82,27 +84,27 @@ struct AddNote: View {
                     self.isImagePickerDisplay.toggle()
                 }, label: {Text("Camera")})
             })
-        .onChange(of: selectedImage){ _ in
-           txtDescription = ""
-            txtTitel = ""
-        }
+            .onChange(of: selectedImage){ _ in
+                txtDescription = ""
+                txtTitel = ""
+            }
             // Display the selected image
-                           if let selectedImage = selectedImage {
-                               ZStack{
-                                   Image(uiImage: selectedImage)
-                                       .resizable()
-                                          .scaledToFill() // Fill the frame, which may clip the image
-                                          .frame(width: 300, height: 300) // Set both width and height to ensure a square area
-                                          .clipped() // Clip the overflow to maintain the aspect ratio within the frame
-                                          .cornerRadius(10) // Apply rounded corners
-                                          .padding() 
-                                   
-                                       .onAppear{
-                                           isImageSelected = true
-                                           
-                                       }
-                               }
-                           }
+            if let selectedImage = selectedImage {
+                ZStack{
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFill() // Fill the frame, which may clip the image
+                        .frame(width: 300, height: 300) // Set both width and height to ensure a square area
+                        .clipped() // Clip the overflow to maintain the aspect ratio within the frame
+                        .cornerRadius(10) // Apply rounded corners
+                        .padding()
+                    
+                        .onAppear{
+                            isImageSelected = true
+                            
+                        }
+                }
+            }
             if isImageSelected {
                 
                 TextField("Add titel", text: $txtTitel).focused($isTitleFocused)
@@ -110,7 +112,7 @@ struct AddNote: View {
                     .frame(width: 300, height: 40)
                     .border(Color.gray, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                     .cornerRadius(8)
-                   
+                
                 
                 
                 TextEditor( text: $txtDescription)
@@ -119,9 +121,9 @@ struct AddNote: View {
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.gray, lineWidth: 1)
-                        
+                             
                     ).padding()
-             
+                
                 
                 
                 ///Fetcha Advice API
@@ -136,7 +138,7 @@ struct AddNote: View {
                             print(error.localizedDescription)
                         }
                     }
-                      
+                    
                 }, label: {
                     Text("Generate Decription").padding(.bottom,10)
                     
@@ -160,7 +162,7 @@ struct AddNote: View {
                                     
                                     if let user = dbConnection.currentUser {
                                         NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
-                                            print("Note added to firestore")
+                                        print("Note added to firestore")
                                         dismiss()
                                     }
                                 case .failure(let error):
@@ -168,7 +170,7 @@ struct AddNote: View {
                                     dismiss()
                                 }
                             }
-                           
+                            
                             
                         }
                     }
@@ -178,11 +180,11 @@ struct AddNote: View {
                             NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                             print("note ")
                             dismiss()
-
+                            
                         }
                     }
-                   
-               
+                    
+                    
                 }, label: {Image(systemName: "arrow.forward")
                         .resizable()
                     
@@ -196,25 +198,23 @@ struct AddNote: View {
                 })
                 
             }/// if closed
-              
-            
-            
-                
-                
             
             
             
             
-           
             
             
             
-           
+            
+            
+            
+            
+            
+            
+            
             Button("Cancel"){
                 dismiss()
             }
-            
-            
         }
         .sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
             self.isDescriptionFocused = false
@@ -222,12 +222,18 @@ struct AddNote: View {
                 ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
         }
     
+
     }
 }
+
+
+
+
 
 struct AddNote_Previews: PreviewProvider {
     static var previews: some View {
         AddNote(note: NoteClass())
             .environmentObject(DbConnection())
+            .environmentObject(ThemeColor())
     }
 }

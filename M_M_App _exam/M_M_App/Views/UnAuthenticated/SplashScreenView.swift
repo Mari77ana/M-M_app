@@ -75,20 +75,20 @@ struct SplashScreenView: View {
     @StateObject var db = DbConnection()
     @EnvironmentObject var themeColor: ThemeColor
     
-
     
-
-
+    
+    
+    
     @State var rotationAngle: Double = 0.0
     @State var size: Double = 0.1
     @State var opacity: Double = 0.6
     @State var isActive = false
-    
     @State var currentUser: UserData? //= UserData(firstname: "", lastname: "")
     
-    @EnvironmentObject var themeColor: ThemeColor
-    /// kanske jag behöver colorSchemeMode
 
+    
+    /// kanske jag behöver colorSchemeMode
+    
     var body: some View {
         VStack {
             Image("cameraIcon")
@@ -112,7 +112,7 @@ struct SplashScreenView: View {
             }
         }
     }
-
+    
     private func triggerSplashAnimation() {
         // Reset animation properties
         rotationAngle = 0.0
@@ -133,15 +133,3 @@ struct SplashScreenView: View {
         }
     }
 }
-
-
-
-
-struct SplashScreenView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        SplashScreenView().environmentObject(ThemeColor())
-    }
-    
-}
-

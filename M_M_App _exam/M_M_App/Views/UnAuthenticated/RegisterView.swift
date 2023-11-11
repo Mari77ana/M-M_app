@@ -24,7 +24,7 @@ struct RegisterView: View {
     var body: some View {
         NavigationStack{
             ZStack{
-                themeColor.colorSchemeMode()
+                themeColor.colorSchemeMode().ignoresSafeArea()
                 themeColor.themeFormCircle()
                 themeColor.themeFormRoundenRectangle()
                 

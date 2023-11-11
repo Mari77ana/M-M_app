@@ -65,45 +65,39 @@ struct MainView : View {
                
            
                 VStack{
-                    /// Img Frame
-                    /*
-                   
-                     
-                     Image("Frame 8-2")
-                         .resizable()
-                         .aspectRatio(contentMode: .fill)
-                         .frame(width: UIScreen.main.bounds.width, height: 130)
-                         .ignoresSafeArea()
-                     
-                     
-                    */
-                       
-                    
                     /// Img Person
                     HStack(){ ///20 var innan spacing: 10
                         Image(systemName: "person")
                             .resizable()
-                            .frame(width: 25,height: 25)
+                            .frame(width: 30,height: 30)
                             .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                             
-                          
                         /// Username
                         Text(dbConnection.currentUserData?.firstname ?? "username")
-                            .font(.title2)
+                            .font(.title)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                        
                         Spacer()
                         
+                        VStack (){
+                            /// Logout Button
+                            Button(action: {
+                                dbConnection.signOut()
+                                
+                            }, label: {Text ("Log out")
+                            })
+                            .padding(.top, -20) //.top, -30
+                            .font(.headline)
+                            
+                            
                             ///  DarkMode Button
                             Button(action: {
                                 themeColor.isDarkModeEnabled.toggle()
                             }, label: {
-                                Text(themeColor.isDarkModeEnabled ? "LightMode" : "Dark Mode")
-                                    .font(.headline)
+                                Text(themeColor.isDarkModeEnabled ? "Light Mode" : "Dark Mode")
+                                    .font(.title2)
                             })
-                            //.padding(.horizontal, 20)
                             
-                            
+                        }// VStack ends for buttons
                         
                     }//.padding(.trailing,230) ///180
                     .padding(.horizontal, 10)
@@ -116,17 +110,12 @@ struct MainView : View {
                            
                     )
                     
-                    
-                    
                     Spacer()
                   
-                    
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
                     }
-                    //Spacer()
-                   
-                   
+                    Spacer()
                     
                     if showPopUp{
                         AddNote(note: myNoteClass)
@@ -143,25 +132,16 @@ struct MainView : View {
                                 Text("+").foregroundStyle(.black).font(.largeTitle)
                             }
                       
-                    }).padding(.bottom, 60)
+                    })//.padding(.bottom, 60)
                         .padding(.horizontal, animate ? 30 : 50)
-                        //.scaleEffect(animate ? 1.4 : 1.0)
-                        
-                    
-                    
-            
-                    VStack{
-                      
-                    
-                            Button(action: {
-                                dbConnection.signOut()
-                                
-                            }, label: {Text ("Log out")})
-                        
-                    }
-                    
-                  
-                    
+                        //.scaleEffect(animate ? 1.1 : 1.0)
+                        .background(
+                           Rectangle().frame(width: 393, height: 133)
+                                .foregroundColor(.gray)
+                                .opacity(0.3)
+                                .ignoresSafeArea()
+                           
+                    )
                 }
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
                         .environmentObject(dbConnection)
@@ -171,6 +151,11 @@ struct MainView : View {
         }.onAppear(perform: startListeningToDb)
         .onAppear(perform: addAnimation)
     }
+    
+    
+    
+    
+    
     
     
     func addAnimation(){
@@ -184,15 +169,11 @@ struct MainView : View {
                 animate.toggle()
             }
         }
-    }
+    } /// function ends
+
+ 
     
-    
-    
-    
-    
-    
-    
-}
+}/// View ends
 
 struct MainView_Previews: PreviewProvider {
     

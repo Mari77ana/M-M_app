@@ -41,7 +41,7 @@ class ThemeColor: ObservableObject {
     func themeFormRoundenRectangle() -> some View {
         
         RoundedRectangle(cornerRadius: 630, style: .continuous)
-            .frame(width: 190, height: 270)
+            .frame(width: 230, height: 300)
             .rotationEffect(.degrees(135))
             .offset(x: -140, y: 390)
             .foregroundColor(isDarkModeEnabled ? Color.darkGray : Color.blue)

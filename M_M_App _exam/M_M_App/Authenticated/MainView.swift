@@ -18,6 +18,7 @@ struct MainView : View {
     @EnvironmentObject var themeColor: ThemeColor
     
     @State var showPopUp = false
+    
   
     
     func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
@@ -56,21 +57,50 @@ struct MainView : View {
     var body: some View{
         NavigationStack{
             ZStack{
+           
                 themeColor.colorSchemeMode().ignoresSafeArea()
+           
+           
                 themeColor.themeFormCircle()
                 themeColor.themeFormRoundenRectangle()
+           
                 
-                
+               
                 VStack{
-                    HStack(spacing: 10){ ///20 var innan
+                    Image("Frame 8-2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: UIScreen.main.bounds.width, height: -10)
+                    
+                    HStack(spacing: 10){ ///20 var innan spacing: 10
                         Image(systemName: "person")
-                        
+                            .resizable()
+                            .frame(width: 25,height: 25)
+                            .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                          
+                            
                         Text(dbConnection.currentUserData?.firstname ?? "username")
+                            .font(.title2)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                        
+                        Spacer()
                         
                         
+                        Button(action: {
+                            themeColor.isDarkModeEnabled.toggle()
+                        }, label: {
+                            Text(themeColor.isDarkModeEnabled ? "LightMode" : "Dark Mode")
+                        })
+                       // .padding(.leading)
+                      
                         
-                    }.padding(.trailing,250) ///180, flytttade in den lite
+                        
+                    }//.padding(.trailing,230) ///180
+                    .padding(.horizontal, 25)
+                    
+                       
                     Spacer()
+                    
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
                     }

@@ -29,7 +29,7 @@ class ThemeColor: ObservableObject {
     func themeFormCircle() -> some View {
         
         Circle()
-            .frame(width: 240)
+            .frame(width: 270)
             .offset(x: 150, y: -420)
             .foregroundColor(isDarkModeEnabled ? Color.lightBlack : Color.green )
             .blur(radius: 5)
@@ -50,7 +50,7 @@ class ThemeColor: ObservableObject {
     }
     
   
-    
+   
     
     
 }

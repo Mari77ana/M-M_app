@@ -61,7 +61,7 @@ struct MainView : View {
            
                 themeColor.colorSchemeMode().ignoresSafeArea()
                 themeColor.themeFormCircle()
-                themeColor.themeFormRoundenRectangle()
+                themeColor.themeFormRoundedRectangle()
                
            
                 VStack{

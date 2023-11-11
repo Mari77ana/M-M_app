@@ -10,12 +10,19 @@ import SwiftUI
 import FirebaseFirestore
 
 struct MainView : View {
-    var db = Firestore.firestore()
-    @StateObject var myNoteClass = NoteClass()
-    @State var showPopUp = false
-    @EnvironmentObject var dbConnection: DbConnection
     
-    func startListeningToDb(){
+    var db = Firestore.firestore()
+    
+    @StateObject var myNoteClass = NoteClass()
+    @EnvironmentObject var dbConnection: DbConnection
+    @EnvironmentObject var themeColor: ThemeColor
+    
+    @State var showPopUp: Bool = false
+    @State var animate: Bool = false
+    
+  
+    
+    func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
     
         guard let currentUser = dbConnection.currentUser else {return}
         
@@ -51,37 +58,90 @@ struct MainView : View {
     var body: some View{
         NavigationStack{
             ZStack{
-                
+           
+                themeColor.colorSchemeMode().ignoresSafeArea()
+                themeColor.themeFormCircle()
+                themeColor.themeFormRoundenRectangle()
+               
+           
                 VStack{
-                    HStack(spacing: 20){
+                    /// Img Person
+                    HStack(){ ///20 var innan spacing: 10
                         Image(systemName: "person")
-                        
+                            .resizable()
+                            .frame(width: 30,height: 30)
+                            .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                            
+                        /// Username
                         Text(dbConnection.currentUserData?.firstname ?? "username")
+                            .font(.title)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                        Spacer()
                         
+                        VStack (){
+                            /// Logout Button
+                            Button(action: {
+                                dbConnection.signOut()
+                                
+                            }, label: {Text ("Log out")
+                            })
+                            .padding(.top, -20) //.top, -30
+                            .font(.headline)
+                            
+                            
+                            ///  DarkMode Button
+                            Button(action: {
+                                themeColor.isDarkModeEnabled.toggle()
+                            }, label: {
+                                Text(themeColor.isDarkModeEnabled ? "Light Mode" : "Dark Mode")
+                                    .font(.title2)
+                            })
+                            
+                        }// VStack ends for buttons
                         
-                        
-                    }.padding(.trailing,180)
+                    }//.padding(.trailing,230) ///180
+                    .padding(.horizontal, 10)
+                    .padding()
+                    .background(
+                        Rectangle().frame(width: 393, height: 125)
+                            .foregroundColor(.gray)
+                            .opacity(0.3)
+                            .ignoresSafeArea()
+                           
+                    )
+                    
                     Spacer()
+                  
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
                     }
                     Spacer()
-                    Button(action: {showPopUp = true}, label: {Text("Add")}).padding()
-                   
                     
                     if showPopUp{
                         AddNote(note: myNoteClass)
                     }
-                    
-                    
-                    Button(action: {
-                        dbConnection.signOut()
                         
-                    }, label: {Text ("Log out")})
                     
-                    
-               
-                    
+                    ///  Animatet Button
+                    Button(action: {
+                        showPopUp = true}, label: {
+                          
+                            ZStack{
+                                Circle().frame(width: 70)
+                                    .foregroundColor(animate ? Color.indigo : Color.pink)
+                                Text("+").foregroundStyle(.black).font(.largeTitle)
+                            }
+                      
+                    })//.padding(.bottom, 60)
+                        .padding(.horizontal, animate ? 30 : 50)
+                        //.scaleEffect(animate ? 1.1 : 1.0)
+                        .background(
+                           Rectangle().frame(width: 393, height: 133)
+                                .foregroundColor(.gray)
+                                .opacity(0.3)
+                                .ignoresSafeArea()
+                           
+                    )
                 }
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
                         .environmentObject(dbConnection)
@@ -89,13 +149,38 @@ struct MainView : View {
             }
             
         }.onAppear(perform: startListeningToDb)
+        .onAppear(perform: addAnimation)
     }
-}
+    
+    
+    
+    
+    
+    
+    
+    func addAnimation(){
+        guard !animate else {return} /// In need because of onAppear so it wont toggle twice when switch screen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(
+            Animation
+                .easeInOut(duration: 2.0)
+                .repeatForever()
+            ) {
+                animate.toggle()
+            }
+        }
+    } /// function ends
+
+ 
+    
+}/// View ends
 
 struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
-        MainView().environmentObject(DbConnection())
+        MainView()
+            .environmentObject(DbConnection())
+            .environmentObject(ThemeColor())
     }
     
 }

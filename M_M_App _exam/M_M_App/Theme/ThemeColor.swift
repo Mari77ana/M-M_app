@@ -14,7 +14,7 @@ class ThemeColor: ObservableObject {
     
     
     
-    /// Function for Theme Color
+    ///    * Dark Mode
     func colorSchemeMode() -> Color {
         
         if isDarkModeEnabled {
@@ -23,5 +23,34 @@ class ThemeColor: ObservableObject {
             return Color(.white)
         }
     }
+    
+    
+    ///  * Circle *
+    func themeFormCircle() -> some View {
+        
+        Circle()
+            .frame(width: 320)
+            .offset(x: 150, y: -420)
+            .foregroundColor(isDarkModeEnabled ? Color.lightBlack : Color.green )
+            .blur(radius: 5)
+    }
+    
+    
+    
+    ///  * Roundedrectangle *
+    func themeFormRoundenRectangle() -> some View {
+        
+        RoundedRectangle(cornerRadius: 630, style: .continuous)
+            .frame(width: 230, height: 300)
+            .rotationEffect(.degrees(135))
+            .offset(x: -140, y: 390)
+            .foregroundColor(isDarkModeEnabled ? Color.darkGray : Color.blue)
+            .blur(radius: 5)
+        
+    }
+    
+  
+   
+    
     
 }

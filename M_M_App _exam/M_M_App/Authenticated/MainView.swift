@@ -62,47 +62,62 @@ struct MainView : View {
                 themeColor.colorSchemeMode().ignoresSafeArea()
                 themeColor.themeFormCircle()
                 themeColor.themeFormRoundenRectangle()
+               
            
                 VStack{
-                    Image("Frame 8-2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: UIScreen.main.bounds.width, height: -10)
+                    /// Img Frame
+                    /*
+                   
+                     
+                     Image("Frame 8-2")
+                         .resizable()
+                         .aspectRatio(contentMode: .fill)
+                         .frame(width: UIScreen.main.bounds.width, height: 130)
+                         .ignoresSafeArea()
+                     
+                     
+                    */
+                       
                     
-                    HStack(spacing: 10){ ///20 var innan spacing: 10
+                    /// Img Person
+                    HStack(){ ///20 var innan spacing: 10
                         Image(systemName: "person")
                             .resizable()
                             .frame(width: 25,height: 25)
                             .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                          
                             
+                          
+                        /// Username
                         Text(dbConnection.currentUserData?.firstname ?? "username")
                             .font(.title2)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                         
                         Spacer()
                         
-                        VStack(){
-                           
-                            
-                            
+                            ///  DarkMode Button
                             Button(action: {
                                 themeColor.isDarkModeEnabled.toggle()
                             }, label: {
                                 Text(themeColor.isDarkModeEnabled ? "LightMode" : "Dark Mode")
+                                    .font(.headline)
                             })
-                        
-                           // .padding(.leading)
+                            //.padding(.horizontal, 20)
                             
-                        }
-                     
-                      
-                        
+                            
                         
                     }//.padding(.trailing,230) ///180
-                    .padding(.horizontal, 25)
+                    .padding(.horizontal, 10)
+                    .padding()
+                    .background(
+                        Rectangle().frame(width: 393, height: 125)
+                            .foregroundColor(.gray)
+                            .opacity(0.3)
+                            .ignoresSafeArea()
+                           
+                    )
                     
-                       
+                    
+                    
                     Spacer()
                   
                     
@@ -116,6 +131,7 @@ struct MainView : View {
                     if showPopUp{
                         AddNote(note: myNoteClass)
                     }
+                        
                     
                     ///  Animatet Button
                     Button(action: {
@@ -130,14 +146,12 @@ struct MainView : View {
                     }).padding(.bottom, 60)
                         .padding(.horizontal, animate ? 30 : 50)
                         //.scaleEffect(animate ? 1.4 : 1.0)
+                        
                     
                     
             
                     VStack{
-                        Image("Frame 8-2")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: UIScreen.main.bounds.width, height: -10)
+                      
                     
                             Button(action: {
                                 dbConnection.signOut()

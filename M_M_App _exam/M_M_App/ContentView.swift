@@ -71,6 +71,7 @@ struct ContentView: View {
     @EnvironmentObject var themeColor: ThemeColor
     
     var body: some View {
+
         SplashScreenView().environmentObject(themeColor)
     }
 }
@@ -80,3 +81,58 @@ struct ContentView_Previews: PreviewProvider {
         ContentView().environmentObject(ThemeColor())
     }
 }
+
+
+
+
+
+
+
+/*
+if let user = db.currentUser {
+    NavigationStack{
+        
+        VStack{
+            /// Börja fr SplashScreen
+            if let user = db.currentUser{
+                if showSplashScreen{
+                    SplashScreenView().environmentObject(themeColor)
+                    /// onAppear in need to show SplashScreen again for 0.5 sek
+                        .onAppear{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 ){
+                                showSplashScreen = false
+                            }
+                        }
+                }else{
+                    MainView().environmentObject(db).environmentObject(themeColor)
+                }
+            }else{
+                NavigationStack{
+                    LoginView(db: db).environmentObject(themeColor)
+                    //SplashScreenView()
+                }
+            }
+            
+        }
+    }
+    
+    
+}
+else{
+    NavigationStack{
+        LoginView(db: db)
+       // SplashScreenView()
+    }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+

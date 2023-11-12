@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//
+
 //struct SplashScreenView: View {
 //    
 //    @State var rotationAngle: Double = 0.0

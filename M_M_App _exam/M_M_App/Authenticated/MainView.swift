@@ -67,18 +67,10 @@ struct MainView : View {
                 VStack{
                     /// Img Person
                     HStack(){ ///20 var innan spacing: 10
-                        Image(systemName: "person")
-                            .resizable()
-                            .frame(width: 30,height: 30)
-                            .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                            
-                        /// Username
-                        Text(dbConnection.currentUserData?.firstname ?? "username")
-                            .font(.title)
-                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                        Spacer()
                         
-                        VStack (){
+                     
+                        
+                       
                             /// Logout Button
                             Button(action: {
                                 dbConnection.signOut()
@@ -87,17 +79,21 @@ struct MainView : View {
                             })
                             .padding(.top, -20) //.top, -30
                             .font(.headline)
-                            
+                        
+                          Spacer()
                             
                             ///  DarkMode Button
                             Button(action: {
                                 themeColor.isDarkModeEnabled.toggle()
                             }, label: {
-                                Text(themeColor.isDarkModeEnabled ? "Light Mode" : "Dark Mode")
-                                    .font(.title2)
+                                Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
+                                       .resizable()
+                                       .scaledToFit()
+                                       .frame(width: 30, height: 30) // Adjust the frame as needed
+                                       .padding(.bottom, 30)
                             })
                             
-                        }// VStack ends for buttons
+                      
                         
                     }//.padding(.trailing,230) ///180
                     .padding(.horizontal, 10)
@@ -109,6 +105,15 @@ struct MainView : View {
                             .ignoresSafeArea()
                            
                     )
+                    Image(systemName: "person")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                        .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                        
+                    /// Username
+                    Text(dbConnection.currentUserData?.firstname ?? "username")
+                        .font(.title)
+                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                     
                     Spacer()
                   
@@ -127,7 +132,7 @@ struct MainView : View {
                         showPopUp = true}, label: {
                           
                             ZStack{
-                                Circle().frame(width: 70)
+                                Circle().frame(width: 60)
                                     .foregroundColor(animate ? Color.indigo : Color.pink)
                                 Text("+").foregroundStyle(.black).font(.largeTitle)
                             }

@@ -37,8 +37,8 @@ struct ContentView: View {
                         }
                     }else{
                         NavigationStack{
-                            LoginView(db: db).environmentObject(themeColor)
-                            //SplashScreenView()
+                         
+                            SplashScreenView()
                         }
                     }
                     
@@ -49,8 +49,8 @@ struct ContentView: View {
         }
         else{
             NavigationStack{
-                LoginView(db: db)
-               // SplashScreenView()
+            
+                SplashScreenView()
             }
             
             

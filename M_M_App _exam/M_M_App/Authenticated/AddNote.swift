@@ -106,7 +106,7 @@ struct AddNote: View {
                                     
                                 case .success(let url):
                                     
-                                    var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: url.absoluteString)
+                                    let newNote = Note(titel: txtTitel, description: txtDescription,imageURL: url.absoluteString)
                                     
                                     print("Image URL: \(url.absoluteString)")
                                     
@@ -126,7 +126,7 @@ struct AddNote: View {
                     }
                     else{
                         if let user = dbConnection.currentUser{
-                            var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
+                            let newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
                             NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
                             print("note ")
                             dismiss()

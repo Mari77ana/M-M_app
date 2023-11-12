@@ -52,7 +52,7 @@ struct LoginView: View {
                         .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                     Image(systemName: "person")
                         .resizable()
-                        .frame(width: 60, height: 60)
+                        .frame(width: 50, height: 50)
                         .foregroundStyle(.green)
                         .padding(30)
                     Spacer()

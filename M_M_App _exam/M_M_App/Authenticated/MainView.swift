@@ -67,9 +67,7 @@ struct MainView : View {
                 VStack{
                     /// Img Person
                     HStack(){ ///20 var innan spacing: 10
-                        
-                     
-                        
+
                        
                             /// Logout Button
                             Button(action: {

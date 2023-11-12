@@ -56,9 +56,9 @@ struct AddNote: View {
    
     var body: some View {
 
+
         
         VStack {
-            
             /// Add Photo
             Button(action: {
                 self.showSheet = true

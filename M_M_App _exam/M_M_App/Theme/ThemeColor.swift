@@ -31,7 +31,7 @@ class ThemeColor: ObservableObject {
         Circle()
             .frame(width: 320)
             .offset(x: 150, y: -420)
-            .foregroundColor(isDarkModeEnabled ? Color.lightblack : Color.green )
+            .foregroundColor(isDarkModeEnabled ? Color.lightBlack : Color.green )
             .blur(radius: 5)
     }
     

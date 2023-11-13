@@ -104,21 +104,21 @@ struct MainView : View {
                                 .ignoresSafeArea()
                                
                         )
-                    
-                    Spacer()
-                   
-                    /// Image Person
-                    Image(systemName: "person")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .foregroundColor(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                    ZStack{
                         
-                    /// Username
-                    Text(dbConnection.currentUserData?.firstname ?? "username")
-                        .font(.title)
+                        
+                        
+                        Circle()
+                            .foregroundColor (.yellow)
+                            .frame (width: 100, height: 100)
+                            .padding (.bottom, 5)
+                            .padding (.top,8)
+                        Text (dbConnection.currentUserData?.firstname ??
+                              "username")
+                        .font (.custom ("AndThenItEnds", size: 20))
+                       // .offset (y: 4)
                         .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                    
-                    Spacer()
+                    }
                   
                     /// Note Grid
                     ZStack{

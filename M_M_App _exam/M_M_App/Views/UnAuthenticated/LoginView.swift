@@ -46,16 +46,63 @@ struct LoginView: View {
                 themeColor.themeFormRoundenRectangle()
                 
                 VStack {
-                    Text("LensLog")
-                        .font(.largeTitle)
-                        .italic()
-                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                    Image(systemName: "person")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundStyle(.green)
-                        .padding(30)
-                    Spacer()
+                    
+                  
+                    
+//                    Text("LensLog")
+//                        .font(.custom("AndThenItEnds", size: 40)
+//                            )
+//                    
+//                        .italic()
+//                        //.shadow(color: .black, radius: 1, x: 0, y: 1)
+//                        .padding(.top,100)
+//                        
+//                        
+//                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+//                        .background(
+//                            
+//                           Circle()
+//                                
+//                                   .foregroundColor(.yellow)
+//                                   .offset(y: 45) // Adjust the 'y' value to move the circle down
+//                                
+//                           )
+//                   
+//                    Image("cameraIcon")
+////                    Image(systemName: "person")
+////                        .resizable()
+////                        .frame(width: 50, height: 50)
+////                        .foregroundStyle(.green)
+//                        
+//                        
+//                       // .padding()
+//                    
+                    ZStack {
+                        
+                      
+                        // Circle and Image as the background
+                        Circle()
+                            .foregroundColor(.yellow)
+                            .frame(width: 200, height: 200)
+                            .padding(.top,100)
+                            .padding(.bottom,-20)
+                           
+                                Image("cameraIcon")
+                                   
+                                    .resizable()
+                                    .scaledToFit()
+                                   // .opacity(0.5)
+                                    .frame(width: 75, height: 75)
+                                    .offset(y: 100)
+                      
+                        Text("LensLog")
+                            .font(.custom("AndThenItEnds", size: 55))
+                            .italic()
+                            .offset(y: -15)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+//                            .shadow(color: themeColor.isDarkModeEnabled ? .black : .green, radius: 1, x: 0, y: 1)
+                            .padding(.top, 100)
+                    }
                     
                     VStack(spacing: 45){
                         TextField("Enter your email", text: $email)
@@ -63,11 +110,13 @@ struct LoginView: View {
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                         
                         SecureField("Enter your password", text: $password)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                         
                         
                         // Login Button
@@ -93,7 +142,7 @@ struct LoginView: View {
                                 .foregroundStyle(.white)
                                 .cornerRadius(30)
                         })
-                        Spacer()
+                   
                         
                         /// Go to Register
                         NavigationLink(destination: {
@@ -105,11 +154,14 @@ struct LoginView: View {
                                 Text("Sign Up!").bold()
                                     .foregroundStyle(.indigo)
                             }
+                           
                         })
                         
-                    }.padding(60)
+                    }.padding(30)
+                    Spacer()
                     
-                }.padding(.top, 70)
+                }.padding()
+                
                 
                 
             }

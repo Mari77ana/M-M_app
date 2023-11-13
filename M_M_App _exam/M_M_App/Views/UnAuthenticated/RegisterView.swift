@@ -29,40 +29,65 @@ struct RegisterView: View {
                 themeColor.themeFormRoundenRectangle()
                 
                 VStack(){
-                    Text("LENSLOG")
-                        .font(.largeTitle)
-                        .italic()
-                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                    ZStack {
                         
+                      
+                        // Circle and Image as the background
+                        Circle()
+                            .foregroundColor(.yellow)
+                            .frame(width: 150, height: 150)
+                            .padding(.top,100)
+                            .padding(.bottom,-20)
+                            .padding(.top,-80)
+                           
+                                Image("cameraIcon")
+                                   
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 55, height: 55)
+                                    .offset(y: 60)
+                      
+                        Text("LensLog")
+                            .font(.custom("AndThenItEnds", size: 45))
+                            .italic()
+                            .offset(y: -40)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                            .padding(.top, 100)
+                    }
                     
                     VStack(spacing: 45){
                         TextField("Enter your Firstname", text: $firstname)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         TextField("Enter your Lastname", text:$lastname )
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         TextField("Enter your Email", text: $email)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         SecureField("Enter your password", text:$password )
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                         
                         SecureField("Confirm password", text:$comfirmPassword)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .cornerRadius(10)
                         
                         
                         Button(action: {

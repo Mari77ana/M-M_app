@@ -36,6 +36,7 @@
 		490796E52AF81B5D00CF6A89 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490796E42AF81B5D00CF6A89 /* ImagePickerView.swift */; };
 		490796E72AF81B8300CF6A89 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490796E62AF81B8300CF6A89 /* Coordinator.swift */; };
 		490796ED2AF91E6F00CF6A89 /* StorageDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490796EC2AF91E6F00CF6A89 /* StorageDB.swift */; };
+		49CD23ED2B02447B006D15E7 /* And Then It Ends.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49CD23EC2B02447B006D15E7 /* And Then It Ends.otf */; };
 		49EF4E822AE7BDAE00851343 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		49EF4E862AE7F36200851343 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E852AE7F36200851343 /* Grid.swift */; };
 		49EF4E882AE7F3C500851343 /* NoteClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF4E872AE7F3C500851343 /* NoteClass.swift */; };
@@ -92,6 +93,7 @@
 		490796E62AF81B8300CF6A89 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		490796EC2AF91E6F00CF6A89 /* StorageDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDB.swift; sourceTree = "<group>"; };
 		4933CFF12AFE59450078250C /* M-M-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "M-M-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		49CD23EC2B02447B006D15E7 /* And Then It Ends.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "And Then It Ends.otf"; sourceTree = "<group>"; };
 		49EF4E852AE7F36200851343 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		49EF4E872AE7F3C500851343 /* NoteClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteClass.swift; sourceTree = "<group>"; };
 		49EF4E892AE7F44700851343 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				0756AD7A2ADAEA6F0092F7FF /* Model */,
 				0756AD422ADAC3720092F7FF /* M_M_AppApp.swift */,
 				0756AD442ADAC3720092F7FF /* ContentView.swift */,
+				49CD23EC2B02447B006D15E7 /* And Then It Ends.otf */,
 				0756AD6E2ADAE3320092F7FF /* GoogleService-Info.plist */,
 				0756AD462ADAC3740092F7FF /* Assets.xcassets */,
 				0756AD482ADAC3740092F7FF /* Preview Content */,
@@ -434,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CD23ED2B02447B006D15E7 /* And Then It Ends.otf in Resources */,
 				0756AD4A2ADAC3740092F7FF /* Preview Assets.xcassets in Resources */,
 				0756AD472ADAC3740092F7FF /* Assets.xcassets in Resources */,
 				0756AD6F2ADAE3320092F7FF /* GoogleService-Info.plist in Resources */,

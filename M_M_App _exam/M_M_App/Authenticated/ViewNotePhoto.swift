@@ -15,32 +15,40 @@ struct ViewNotePhoto: View {
     var body: some View {
         ZStack{
             
-            Text(entry.titel).padding()
+            themeColor.colorSchemeMode().ignoresSafeArea()
+            themeColor.themeFormCircle()
+            themeColor.themeFormRoundenRectangle()
             
-            
-            //display image
-            if let imageURL = entry.imageURL, let url = URL(string: imageURL){
-                AsyncImage(url: url) {
-                    phase in
-                    switch phase {
-                    case .success(let image):
-                        image.resizable()
-                        //.scaledToFit()
-                            .frame(width:  380, height: 400).padding(15)
-                    case .failure:
-                        Text("Unable to load")
-                    case .empty:
-                        ProgressView()
-                    @unknown default:
-                        EmptyView()
+            VStack{
+                Text(entry.titel).padding()
+                    .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
+                
+                
+                //display image
+                if let imageURL = entry.imageURL, let url = URL(string: imageURL){
+                    AsyncImage(url: url) {
+                        phase in
+                        switch phase {
+                        case .success(let image):
+                            image.resizable()
+                            //.scaledToFit()
+                                .frame(width:  380, height: 400).padding(15)
+                        case .failure:
+                            Text("Unable to load")
+                        case .empty:
+                            ProgressView()
+                        @unknown default:
+                            EmptyView()
+                        }
                     }
+                    
+                    Text(entry.description).padding()
+                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
+                    Spacer()
+                    
+                }else{
+                    Text("No image avaible")
                 }
-                
-                Text(entry.description).padding()
-                Spacer()
-                
-            }else{
-                Text("No image avaible")
             }
         }
         

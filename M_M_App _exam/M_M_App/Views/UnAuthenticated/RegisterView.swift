@@ -29,23 +29,30 @@ struct RegisterView: View {
                 themeColor.themeFormRoundenRectangle()
                 
                 VStack(){
-                    Text("REGISTER").font(.largeTitle)
+                    Text("LENSLOG")
+                        .font(.largeTitle)
+                        .italic()
+                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                        
                     
                     VStack(spacing: 45){
                         TextField("Enter your Firstname", text: $firstname)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         TextField("Enter your Lastname", text:$lastname )
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         TextField("Enter your Email", text: $email)
                             .padding(10)
                             .frame(width: 350, height: 40)
                             .border(.black)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                         
                         SecureField("Enter your password", text:$password )
                             .padding(10)

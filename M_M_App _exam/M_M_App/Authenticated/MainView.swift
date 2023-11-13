@@ -58,51 +58,56 @@ struct MainView : View {
     var body: some View{
         NavigationStack{
             ZStack{
-           
+     
                 themeColor.colorSchemeMode().ignoresSafeArea()
                 themeColor.themeFormCircle()
                 themeColor.themeFormRoundenRectangle()
-               
-           
+            
                 VStack{
-                    /// Img Person
-                    HStack(){ ///20 var innan spacing: 10
+                  
+                   HStack(){ ///20 var innan spacing: 10
 
-                       
+                  
                             /// Logout Button
-                            Button(action: {
-                                dbConnection.signOut()
-                                
-                            }, label: {Text ("Log out")
-                            })
-                            .padding(.top, -20) //.top, -30
-                            .font(.headline)
+                        Button(action: {
+                            dbConnection.signOut()
+                            
+                        }, label:
+                                {Text ("Log out")
+                                .font(.headline)
+                        })
+                        //.padding(.top, -20) //.top, -30
+                        .zIndex(1)
+                            
                         
                           Spacer()
                             
                             ///  DarkMode Button
-                            Button(action: {
-                                themeColor.isDarkModeEnabled.toggle()
-                            }, label: {
-                                Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
-                                       .resizable()
-                                       .scaledToFit()
-                                       .frame(width: 30, height: 30) // Adjust the frame as needed
-                                       .padding(.bottom, 30)
-                            })
-                            
-                      
+                        Button(action: {
+                            themeColor.isDarkModeEnabled.toggle()
+                        }, label: {
+                            Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(width: 30, height: 30) // Adjust the frame as needed
+                                   //.padding(.bottom, 30)
+                        })
+                        .zIndex(1)
                         
                     }//.padding(.trailing,230) ///180
-                    .padding(.horizontal, 10)
+                    //.padding(.horizontal, 10)
                     .padding()
-                    .background(
-                        Rectangle().frame(width: 393, height: 125)
-                            .foregroundColor(.gray)
-                            .opacity(0.3)
-                            .ignoresSafeArea()
-                           
-                    )
+                        .overlay(
+                            Rectangle().frame(width: 393, height: 125)
+                                .foregroundColor(.gray)
+                                .opacity(0.3)
+                                .ignoresSafeArea()
+                               
+                        )
+                    
+                    Spacer()
+                   
+                    /// Image Person
                     Image(systemName: "person")
                         .resizable()
                         .frame(width: 30,height: 30)
@@ -115,9 +120,12 @@ struct MainView : View {
                     
                     Spacer()
                   
+                    /// Note Grid
                     ZStack{
                         Grid(noteClass: myNoteClass).frame(height: 380)
+                          
                     }
+                
                     Spacer()
                     
                     if showPopUp{
@@ -149,7 +157,8 @@ struct MainView : View {
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
                         .environmentObject(dbConnection)
                 })
-            }
+                Spacer()
+           }
             
         }.onAppear(perform: startListeningToDb)
         .onAppear(perform: addAnimation)

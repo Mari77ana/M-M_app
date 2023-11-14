@@ -30,8 +30,7 @@ struct RegisterView: View {
                 
                 VStack(){
                     ZStack {
-                        
-                      
+                    
                         // Circle and Image as the background
                         Circle()
                             .foregroundColor(.yellow)

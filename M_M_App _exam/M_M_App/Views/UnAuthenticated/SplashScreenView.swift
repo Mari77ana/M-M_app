@@ -79,9 +79,9 @@ struct SplashScreenView: View {
     @State var size: Double = 0.1
     @State var opacity: Double = 0.6
     @State var isActive = false
-    @State var currentUser: UserData? //= UserData(firstname: "", lastname: "")
+    @State var currentUser: UserData? 
     
-    /// kanske jag behöver colorSchemeMode
+   
     
     var body: some View {
         VStack {

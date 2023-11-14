@@ -23,12 +23,14 @@ final class M_M_AppTests: XCTestCase {
     }
 
     /// Mark: OWN TESTING FUNCTION
+    
+    ///  Testing for throwing
     func testFetchAdvice() async throws {
         
         do{
             var endpoint = "anotherTestOfHttpsAdress"
             try await sut.fetchAdvice(endpoint: endpoint)
-            XCTFail("Error did not throw it should have")
+            XCTFail("Error did not throw. But it should have")
             
         }catch{
             

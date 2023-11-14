@@ -13,7 +13,6 @@ struct LoginView: View {
     @EnvironmentObject var db: DbConnection
     @EnvironmentObject var themeColor: ThemeColor
     
-    //var db = Firestore.firestore()
     @State var email = ""
     @State var password = ""
     @State private var showAlert = false
@@ -39,42 +38,12 @@ struct LoginView: View {
 
 
     var body: some View {
+        
                 VStack {
                     
-                  
-                    
-//                    Text("LensLog")
-//                        .font(.custom("AndThenItEnds", size: 40)
-//                            )
-//                    
-//                        .italic()
-//                        //.shadow(color: .black, radius: 1, x: 0, y: 1)
-//                        .padding(.top,100)
-//                        
-//                        
-//                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-//                        .background(
-//                            
-//                           Circle()
-//                                
-//                                   .foregroundColor(.yellow)
-//                                   .offset(y: 45) // Adjust the 'y' value to move the circle down
-//                                
-//                           )
-//                   
-//                    Image("cameraIcon")
-////                    Image(systemName: "person")
-////                        .resizable()
-////                        .frame(width: 50, height: 50)
-////                        .foregroundStyle(.green)
-//                        
-//                        
-//                       // .padding()
-//                    
                     ZStack {
                         
-                      
-                        // Circle and Image as the background
+                        /// Circle and Image as the background
                         Circle()
                             .foregroundColor(.yellow)
                             .frame(width: 200, height: 200)

@@ -68,11 +68,15 @@ import FirebaseFirestore
 //    }
 struct ContentView: View {
     
-    @EnvironmentObject var themeColor: ThemeColor
+    @StateObject private var dbConnection = DbConnection()
+    
+    @StateObject var themeColor = ThemeColor()  /// Instansiate here for lifecycle and to get access from themeColor to all views
     
     var body: some View {
 
-        SplashScreenView().environmentObject(themeColor)
+        SplashScreenView()
+            .environmentObject(dbConnection)
+            .environmentObject(themeColor)
     }
 }
 

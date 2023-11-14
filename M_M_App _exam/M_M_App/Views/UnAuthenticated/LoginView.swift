@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 struct LoginView: View {
     
-    @ObservedObject var db: DbConnection
+    @EnvironmentObject var db: DbConnection
     @EnvironmentObject var themeColor: ThemeColor
     
     //var db = Firestore.firestore()
@@ -39,12 +39,6 @@ struct LoginView: View {
 
 
     var body: some View {
-        NavigationStack{
-            ZStack{
-                themeColor.colorSchemeMode().ignoresSafeArea()
-                themeColor.themeFormCircle()
-                themeColor.themeFormRoundenRectangle()
-                
                 VStack {
                     
                   
@@ -161,13 +155,7 @@ struct LoginView: View {
                     Spacer()
                     
                 }.padding()
-                
-                
-                
-            }
-            .customAlert(isPresented: $showAlert, title: "Alert", message: alertMessage)
-            
-        }/// ZStack Ends
+                .customAlert(isPresented: $showAlert, title: "Alert", message: alertMessage)
             
     }// Body Ends
     
@@ -182,7 +170,9 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     
     static var previews: some View {
-        LoginView(db: DbConnection()).environmentObject(ThemeColor())
+        LoginView()
+            .environmentObject(DbConnection())
+            .environmentObject(ThemeColor())
     }
     
 }

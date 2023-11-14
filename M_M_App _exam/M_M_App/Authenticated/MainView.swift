@@ -20,8 +20,6 @@ struct MainView : View {
     @State var showPopUp: Bool = false
     @State var animate: Bool = false
     
-  
-    
     func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
     
         guard let currentUser = dbConnection.currentUser else {return}
@@ -56,111 +54,94 @@ struct MainView : View {
      }
     
     var body: some View{
-        NavigationStack{
-            ZStack{
-     
-                themeColor.colorSchemeMode().ignoresSafeArea()
-                themeColor.themeFormCircle()
-                themeColor.themeFormRoundenRectangle()
-            
-                VStack{
-                  
-                   HStack(){ ///20 var innan spacing: 10
-
-                  
-                            /// Logout Button
-                        Button(action: {
-                            dbConnection.signOut()
-                            
-                        }, label:
-                                {Text ("Log out")
-                                .font(.headline)
-                        })
-                        //.padding(.top, -20) //.top, -30
-                        .zIndex(1)
-                            
+                    VStack{
                         
-                          Spacer()
+                        HStack(){ ///20 var innan spacing: 10
+                            
+                            
+                            /// Logout Button
+                            Button(action: {
+                                dbConnection.signOut()
+                                
+                            }, label:
+                                    {Text ("Log out")
+                                    .font(.headline)
+                            })
+                            //.padding(.top, -20) //.top, -30
+                            .zIndex(1)
+                            
+                            
+                            Spacer()
                             
                             ///  DarkMode Button
-                        Button(action: {
-                            themeColor.isDarkModeEnabled.toggle()
-                        }, label: {
-                            Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
-                                   .resizable()
-                                   .scaledToFit()
-                                   .frame(width: 30, height: 30) // Adjust the frame as needed
-                                   //.padding(.bottom, 30)
-                        })
-                        .zIndex(1)
-                        
-                    }//.padding(.trailing,230) ///180
-                    //.padding(.horizontal, 10)
-                    .padding()
+                            Button(action: {
+                                themeColor.isDarkModeEnabled.toggle()
+                            }, label: {
+                                Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30) // Adjust the frame as needed
+                                //.padding(.bottom, 30)
+                            })
+                            .zIndex(1)
+                            
+                        }//.padding(.trailing,230) ///180
+                        //.padding(.horizontal, 10)
+                        .padding()
                         .overlay(
                             Rectangle().frame(width: 393, height: 125)
                                 .foregroundColor(.gray)
                                 .opacity(0.3)
                                 .ignoresSafeArea()
-                               
+                            
                         )
-                    ZStack{
+                        ZStack{
+                            
+
+                            Circle()
+                                .foregroundColor (.yellow)
+                                .frame (width: 100, height: 100)
+                                .padding (.bottom, 5)
+                                .padding (.top,8)
+                            Text (dbConnection.currentUserData?.firstname ??
+                                  "username")
+                            .font (.custom ("AndThenItEnds", size: 20))
+                            // .offset (y: 4)
+                            .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
+                        }
                         
-                        
-                        
-                        Circle()
-                            .foregroundColor (.yellow)
-                            .frame (width: 100, height: 100)
-                            .padding (.bottom, 5)
-                            .padding (.top,8)
-                        Text (dbConnection.currentUserData?.firstname ??
-                              "username")
-                        .font (.custom ("AndThenItEnds", size: 20))
-                       // .offset (y: 4)
-                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
-                    }
-                  
-                    /// Note Grid
-                    ZStack{
+                        /// Note Grid
                         Grid(noteClass: myNoteClass).frame(height: 380)
-                          
-                    }
-                
-                    Spacer()
-                    
-                    if showPopUp{
-                        AddNote(note: myNoteClass)
-                    }
                         
-                    
-                    ///  Animatet Button
-                    Button(action: {
-                        showPopUp = true}, label: {
-                          
-                            ZStack{
-                                Circle().frame(width: 60)
-                                    .foregroundColor(animate ? Color.indigo : Color.pink)
-                                Text("+").foregroundStyle(.black).font(.largeTitle)
-                            }
-                      
-                    })//.padding(.bottom, 60)
+                        
+                        Spacer()
+                        
+                        
+                        ///  Animatet Button
+                        Button(action: {
+                            showPopUp = true}, label: {
+                                
+                                ZStack{
+                                    Circle().frame(width: 60)
+                                        .foregroundColor(animate ? Color.indigo : Color.pink)
+                                    Text("+").foregroundStyle(.black).font(.largeTitle)
+                                }
+                                
+                            })//.padding(.bottom, 60)
                         .padding(.horizontal, animate ? 30 : 50)
                         //.scaleEffect(animate ? 1.1 : 1.0)
                         .background(
-                           Rectangle().frame(width: 393, height: 133)
+                            Rectangle().frame(width: 393, height: 133)
                                 .foregroundColor(.gray)
                                 .opacity(0.3)
                                 .ignoresSafeArea()
-                           
-                    )
-                }
+                            
+                        )
+                    }.zIndex(5.0)
                 .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
                         .environmentObject(dbConnection)
                 })
-                Spacer()
-           }
-            
-        }.onAppear(perform: startListeningToDb)
+        .onAppear(perform: startListeningToDb)
         .onAppear(perform: addAnimation)
     }
     

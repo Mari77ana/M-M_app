@@ -55,6 +55,7 @@ struct AddNote: View {
     
    
     var body: some View {
+        
         ZStack{
             themeColor.colorSchemeMode().ignoresSafeArea()
             themeColor.themeFormCircle()
@@ -112,7 +113,7 @@ struct AddNote: View {
                         .background(Color(red: 0.9, green: 0.9, blue: 0.9, opacity: 1.0))
                         .border(Color.gray, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                         .cornerRadius(8)
-                        
+                    
                     
                     
                     
@@ -122,7 +123,7 @@ struct AddNote: View {
                         .cornerRadius(8)
                         .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.gray, lineWidth: 1)
-                            
+                                 
                         ).padding()
                     
                     
@@ -202,23 +203,21 @@ struct AddNote: View {
                 
                 /// Buton Cancel
                 Button("Cancel"){
-                    dismiss()
-                }
-         
-            }
-            
-            .sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
-                self.isDescriptionFocused = false
                     
+                    dismiss()
+                }.foregroundStyle(Color.red)
+                
+                
+                
+            }.sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
+                self.isDescriptionFocused = false
+                
             }){
                 ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
             }
-           
             
-        }///ZStack Ends for DarkMode
-       
-    
-
+            
+        }/// ZStack ends
     }
 }
 

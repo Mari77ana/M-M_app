@@ -74,18 +74,12 @@ import SwiftUI
 struct SplashScreenView: View {
     @StateObject var db = DbConnection()
     @EnvironmentObject var themeColor: ThemeColor
-    
-    
-    
-    
-    
+
     @State var rotationAngle: Double = 0.0
     @State var size: Double = 0.1
     @State var opacity: Double = 0.6
     @State var isActive = false
     @State var currentUser: UserData? //= UserData(firstname: "", lastname: "")
-    
-
     
     /// kanske jag behöver colorSchemeMode
     
@@ -105,13 +99,32 @@ struct SplashScreenView: View {
             triggerSplashAnimation()
         }
         .fullScreenCover(isPresented: $isActive) {
-            if db.currentUser != nil {
-                MainView().environmentObject(db).environmentObject(themeColor)
-            } else {
-                LoginView(db: db).environmentObject(db)
+            
+                if db.currentUser != nil {
+                    NavigationStack {
+                        ZStack {
+                            themeColor.colorSchemeMode().ignoresSafeArea()
+                            themeColor.themeFormCircle()
+                            themeColor.themeFormRoundenRectangle()
+                            
+                            MainView()
+                        }
+                    }
+                } else {
+                    NavigationStack {
+                        ZStack {
+                            themeColor.colorSchemeMode().ignoresSafeArea()
+                            themeColor.themeFormCircle()
+                            themeColor.themeFormRoundenRectangle()
+                            LoginView()
+                        }
+                    }
+                }
+                
             }
+            
+
         }
-    }
     
     private func triggerSplashAnimation() {
         // Reset animation properties
@@ -132,4 +145,5 @@ struct SplashScreenView: View {
             isActive = true
         }
     }
-}
+    }
+    

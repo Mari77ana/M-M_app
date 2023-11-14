@@ -13,8 +13,7 @@ struct ViewNotePhoto: View {
     @EnvironmentObject var themeColor: ThemeColor
     
     var body: some View {
-        ZStack{
-            
+        ZStack {
             themeColor.colorSchemeMode().ignoresSafeArea()
             themeColor.themeFormCircle()
             themeColor.themeFormRoundenRectangle()
@@ -48,6 +47,7 @@ struct ViewNotePhoto: View {
                     
                 }else{
                     Text("No image avaible")
+                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                 }
             }
         }

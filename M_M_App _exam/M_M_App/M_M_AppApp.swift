@@ -25,17 +25,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct M_M_AppApp: App {
-    @StateObject private var dbConnection = DbConnection()
-    
-    @StateObject var themeColor = ThemeColor()  /// Instansiate here for lifecycle and to get access from themeColor to all views
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
            ContentView()
-                .environmentObject(dbConnection)
-                .environmentObject(themeColor)
         }
     }
 }

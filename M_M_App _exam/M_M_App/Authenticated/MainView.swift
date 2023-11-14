@@ -13,7 +13,7 @@ struct MainView : View {
     
     var db = Firestore.firestore()
     
-  //  @StateObject var myNoteClass = NoteClass()
+  
     @StateObject var notesVM = NotesViewModel()
     @EnvironmentObject var dbConnection: DbConnection
     @EnvironmentObject var themeColor: ThemeColor
@@ -21,46 +21,13 @@ struct MainView : View {
     @State var showPopUp: Bool = false
     @State var animate: Bool = false
     
-//    func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
-//    
-//        guard let currentUser = dbConnection.currentUser else {return}
-//        
-//        db.collection("user_data").document(currentUser.uid).collection("notes").addSnapshotListener{
-//             snapshot, error in
-//             
-//             if let error = error {
-//                 print("error occured \(error.localizedDescription)")
-//                 return
-//             }
-//             //if we havent received any error then the snapshot has received a value
-//             guard let snapshot = snapshot else{return}
-//             
-//            
-//             for document in snapshot.documents{
-//                 let result = Result {
-//                     try document.data(as: Note.self)
-//                 }
-//                 
-//                 switch result {
-//                 case .success(let note):
-//                    
-//                         self.myNoteClass.addEntry(entry: note)
-//                    
-//                         print(note.titel)
-//                 case .failure(let error):
-//                     print(error.localizedDescription)
-//                 }
-//             }
-//         }
-//     }
-    
     var body: some View{
+        
                     VStack{
                         
-                        HStack(){ ///20 var innan spacing: 10
+                        HStack(){
                             
-                            
-                            /// Logout Button
+                            // Logout Button
                             Button(action: {
                                 dbConnection.signOut()
                                 
@@ -68,37 +35,36 @@ struct MainView : View {
                                     {Text ("Log out")
                                     .font(.headline)
                             })
-                            //.padding(.top, -20) //.top, -30
                             .zIndex(1)
-                            
                             
                             Spacer()
                             
-                            ///  DarkMode Button
+                            //  DarkMode Button
                             Button(action: {
                                 themeColor.isDarkModeEnabled.toggle()
                             }, label: {
+                                
                                 Image(systemName: themeColor.isDarkModeEnabled ? "sun.max.fill" : "moon.fill")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 30, height: 30) // Adjust the frame as needed
-                                //.padding(.bottom, 30)
+                                    .frame(width: 30, height: 30)
                             })
                             .zIndex(1)
-                            
-                        }//.padding(.trailing,230) ///180
-                        //.padding(.horizontal, 10)
+                        }
                         .padding()
+                        
                         .overlay(
+                            
                             Rectangle().frame(width: 393, height: 125)
                                 .foregroundColor(.gray)
                                 .opacity(0.3)
                                 .ignoresSafeArea()
                             
                         )
+                        
                         ZStack{
                             
-
+                            //font till username
                             Circle()
                                 .foregroundColor (.yellow)
                                 .frame (width: 100, height: 100)
@@ -107,53 +73,48 @@ struct MainView : View {
                             Text (dbConnection.currentUserData?.firstname ??
                                   "username")
                             .font (.custom ("AndThenItEnds", size: 20))
-                            // .offset (y: 4)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.white : Color.black)
                         }
                         
-                        /// Note Grid
+                        // Note Grid
                         Grid(noteVM: notesVM).frame(height: 380)
-                        
                         
                         Spacer()
                         
-                        
-                        ///  Animatet Button
+                        //  Animatet Button
                         Button(action: {
                             showPopUp = true}, label: {
                                 
                                 ZStack{
+                                    
                                     Circle().frame(width: 60)
                                         .foregroundColor(animate ? Color.indigo : Color.pink)
                                     Text("+").foregroundStyle(.black).font(.largeTitle)
                                 }
                                 
-                            })//.padding(.bottom, 60)
+                            })
                         .padding(.horizontal, animate ? 30 : 50)
-                        //.scaleEffect(animate ? 1.1 : 1.0)
                         .background(
+                            
                             Rectangle().frame(width: 393, height: 133)
                                 .foregroundColor(.gray)
                                 .opacity(0.3)
                                 .ignoresSafeArea()
-                            
                         )
                     }.zIndex(5.0)
+        
             .sheet(isPresented: $showPopUp, content: {AddNote( NoteVM: NotesViewModel())
                         .environmentObject(dbConnection)
                 })
-                .onAppear {if let userId = dbConnection.currentUser?.uid {
-                    notesVM.startListeningToDb(foruserId: userId)
-                }}
+            .onAppear {if let userId = dbConnection.currentUser?.uid {
+                notesVM.startListeningToDb(foruserId: userId)
+            }
+        }
         .onAppear(perform: addAnimation)
     }
     
     
-    
-    
-    
-    
-    
+
     func addAnimation(){
         guard !animate else {return} /// In need because of onAppear so it wont toggle twice when switch screen
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -166,9 +127,6 @@ struct MainView : View {
             }
         }
     } /// function ends
-
- 
-    
 }/// View ends
 
 struct MainView_Previews: PreviewProvider {

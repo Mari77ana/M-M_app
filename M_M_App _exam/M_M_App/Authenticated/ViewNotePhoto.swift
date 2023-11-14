@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ViewNotePhoto: View {
+    
     var entry: Note
-   // @ObservedObject var journal: NoteClass
     @ObservedObject var noteVM: NotesViewModel
     @EnvironmentObject var themeColor: ThemeColor
     
     var body: some View {
         ZStack {
+            
             themeColor.colorSchemeMode().ignoresSafeArea()
             themeColor.themeFormCircle()
             themeColor.themeFormRoundenRectangle()
@@ -26,15 +27,19 @@ struct ViewNotePhoto: View {
                 
                 //display image
                 if let imageURL = entry.imageURL, let url = URL(string: imageURL){
+                    
                     AsyncImage(url: url) {
+                        
                         phase in
                         switch phase {
+                            
                         case .success(let image):
                             image.resizable()
-                            //.scaledToFit()
-                                .frame(width:  380, height: 400).padding(15)
+                            .frame(width:  380, height: 400).padding(15)
+                       
                         case .failure:
                             Text("Unable to load")
+                            
                         case .empty:
                             ProgressView()
                         @unknown default:
@@ -44,6 +49,7 @@ struct ViewNotePhoto: View {
                     
                     Text(entry.description).padding()
                         .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
+                    
                     Spacer()
                     
                 }else{
@@ -52,7 +58,6 @@ struct ViewNotePhoto: View {
                 }
             }
         }
-        
     }
 }
 

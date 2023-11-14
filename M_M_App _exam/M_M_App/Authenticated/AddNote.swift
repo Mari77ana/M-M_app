@@ -13,98 +13,87 @@ struct AddNote: View {
     
     var db = Firestore.firestore()
     
+    @ObservedObject var NoteVM :NotesViewModel
     @ObservedObject var viewModel = AdviceViewmodel()
-    @EnvironmentObject var themeColor: ThemeColor
-   
+    
     @State var notes = [Note]()
-    
     @State var showSheet:Bool = false
-    
     @State var txtTitel = ""
     @State var txtDescription = ""
-    
-   
     @State var isImageSelected = false
-    
-    @ObservedObject var NoteVM :NotesViewModel
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var dbConnection: DbConnection
-    
-    //@ObservedObject var note:NoteClass
-        // @Binding var showPopUp: Bool
-    
-    @FocusState var isTitleFocused:Bool
-    @FocusState var isDescriptionFocused:Bool
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
     
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var dbConnection: DbConnection
+    @EnvironmentObject var themeColor: ThemeColor
    
+    @FocusState var isTitleFocused:Bool
+    @FocusState var isDescriptionFocused:Bool
     
-    
-    func addNoteToFirestore(_ note:Note){
-        do{
-            try db.collection("Note 1").addDocument(from: note)
-            self.notes.append(note)
-            
-        } catch _ {
-            print("error")
-        }}
-    
-    
-   
     var body: some View {
         
         ZStack{
+            
             themeColor.colorSchemeMode().ignoresSafeArea()
             themeColor.themeFormCircle()
             themeColor.themeFormRoundenRectangle()
             
-            
             VStack {
-                /// Add Photo
+                
+                // Add Photo
                 Button(action: {
                     self.showSheet = true
                 }, label: {
                     Text(isImageSelected ? "Choose another photo" : "Add photo")
-                }).padding().confirmationDialog("Select Photo", isPresented: $showSheet, actions: {
-                    
-                    
-                    /// Photo Library
-                    Button(action: {//self.showImagePicker = true
-                        self.sourceType = .photoLibrary
-                        self.isImagePickerDisplay.toggle()
-                    }, label: {Text("Photo Library")})
-                    
-                    
-                    /// Camera
-                    Button(action: {
-                        self.sourceType = .camera
-                        self.isImagePickerDisplay.toggle()
-                    }, label: {Text("Camera")})
                 })
+                .padding()
+                .confirmationDialog("Select Photo", isPresented: $showSheet, actions: {
+                    
+                    
+                    // Photo Library
+                Button(action: {
+                    self.sourceType = .photoLibrary
+                    self.isImagePickerDisplay.toggle()
+                }, label: {
+                    Text("Photo Library")
+                })
+                    
+                    
+                    // Camera
+                Button(action: {
+                    self.sourceType = .camera
+                    self.isImagePickerDisplay.toggle()
+                }, label: {
+                    Text("Camera")
+                })
+                    
+                })//confirmation dialog ends
+                
                 .onChange(of: selectedImage){ _ in
                     txtDescription = ""
                     txtTitel = ""
                 }
                 // Display the selected image
                 if let selectedImage = selectedImage {
+                    
                     ZStack{
+                        
                         Image(uiImage: selectedImage)
                             .resizable()
-                            .scaledToFill() // Fill the frame, which may clip the image
-                            .frame(width: 300, height: 300) // Set both width and height to ensure a square area
-                            .clipped() // Clip the overflow to maintain the aspect ratio within the frame
-                            .cornerRadius(10) // Apply rounded corners
+                            .scaledToFill()
+                            .frame(width: 300, height: 300)
+                            .clipped()
+                            .cornerRadius(10)
                             .padding()
-                        
                             .onAppear{
                                 isImageSelected = true
-                                
-                            }
+                        }
                     }
                 }
+                
                 if isImageSelected {
                     
                     TextField("Add titel", text: $txtTitel).focused($isTitleFocused)
@@ -115,8 +104,6 @@ struct AddNote: View {
                         .cornerRadius(8)
                     
                     
-                    
-                    
                     TextEditor( text: $txtDescription)
                         .frame(width: 300, height: 150)
                         .background(Color(red: 0.9, green: 0.9, blue: 0.9, opacity: 1.0))
@@ -125,7 +112,6 @@ struct AddNote: View {
                             .stroke(Color.gray, lineWidth: 1)
                                  
                         ).padding()
-                    
                     
                     
                     ///Fetcha Advice API
@@ -146,8 +132,9 @@ struct AddNote: View {
                         
                     })
                     
-                    
+                    //add image to db
                     Button(action: {
+                       
                         if let selectedImage = selectedImage{
                             
                             uploadImage(selectedImage){result in
@@ -160,33 +147,19 @@ struct AddNote: View {
                                         
                                         var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: url.absoluteString)
                                         
-                                        print("Image URL: \(url.absoluteString)")
-                                        
                                         if let user = dbConnection.currentUser {
                                             NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
-                                            print("Note added to firestore")
                                             dismiss()
                                         }
+                                        
                                     case .failure(let error):
+                                        
                                         print(error.localizedDescription)
                                         dismiss()
                                     }
                                 }
-                                
-                                
                             }
                         }
-                        else{
-                            if let user = dbConnection.currentUser{
-                                var newNote = Note(titel: txtTitel, description: txtDescription,imageURL: nil)
-                                NoteVM.addNoteToFirestore(newNote, forUserId: user.uid)
-                                print("note ")
-                                dismiss()
-                                
-                            }
-                        }
-                        
-                        
                     }, label: {Image(systemName: "arrow.forward")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -198,16 +171,13 @@ struct AddNote: View {
                             .padding(.bottom)
                     })
                     
-                }/// if closed
+                }// if closed
                 
                 
-                /// Buton Cancel
+                // Buton Cancel
                 Button("Cancel"){
-                    
                     dismiss()
                 }.foregroundStyle(Color.red)
-                
-                
                 
             }.sheet(isPresented: self.$isImagePickerDisplay, onDismiss: {
                 self.isDescriptionFocused = false

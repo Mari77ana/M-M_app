@@ -10,7 +10,7 @@ class NoteClass:ObservableObject{
     @Published private var noteEntry:[Note]
     init() {
         self.noteEntry = [Note]()
-        self.noteEntry.append(Note(titel: "Hello", description: "Description"))
+       // self.noteEntry.append(Note(titel: "Hello", description: "Description"))
     }
     
     func getNotes() -> [Note]{

@@ -128,7 +128,7 @@ struct LoginView: View {
             
     }// Body Ends
     
-}// Content Ends
+}
 
 
 

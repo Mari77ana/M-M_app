@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+
+
+// * STYLES THE ALERT *
+
 struct AlertView: View {
     
     

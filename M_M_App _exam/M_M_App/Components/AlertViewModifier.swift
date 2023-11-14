@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 
+// * ViewModifier -> Protocol describes that an Alert can be cutomized to take in an AlertDialog
+
+
 struct AlertViewModifier: ViewModifier{
     
     @Binding var isPresented: Bool
@@ -29,6 +32,12 @@ struct AlertViewModifier: ViewModifier{
     
     
 }
+
+
+
+
+
+//  With  self.modifier -> implements an AlertViewModifier
 extension View{
     func 
     customAlert(isPresented: Binding<Bool>, title: String, message: String) -> some View{

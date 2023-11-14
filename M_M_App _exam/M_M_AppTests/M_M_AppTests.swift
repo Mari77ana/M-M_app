@@ -24,7 +24,8 @@ final class M_M_AppTests: XCTestCase {
 
     /// Mark: OWN TESTING FUNCTION
     
-    ///  Testing for throwing
+
+    ///   Ecpected to throw an error, if no throw the test fails
     func testFetchAdvice() async throws {
         
         do{
@@ -38,6 +39,7 @@ final class M_M_AppTests: XCTestCase {
     }
     
     
+   ///  Expecting no throws, if throw the test fails
     func apiTest() async throws {
        
         do {
@@ -52,6 +54,7 @@ final class M_M_AppTests: XCTestCase {
     
     
     
+    ///  Expecting no empty Api,   can also throw if throws -> An error occurred
     func apiEmtyTest() async throws {
         
         do{

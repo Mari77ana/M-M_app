@@ -55,7 +55,8 @@ import SwiftUI
 //                      }}}
 //
 struct Grid: View {
-    @ObservedObject var noteClass: NoteClass
+    //@ObservedObject var noteClass: NoteClass
+    @ObservedObject var noteVM: NotesViewModel
     
     let columns: [GridItem] = [
         GridItem(.fixed(50), spacing: 80, alignment: nil),
@@ -66,10 +67,10 @@ struct Grid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
-                ForEach( noteClass.getNotes(), id: \.id) { entry in
+                ForEach(noteVM.notes) { entry in
                     if let imageURL = entry.imageURL, let url = URL(string: imageURL) {
                         // Use AsyncImage to load and display the image
-                        NavigationLink(destination: ViewNotePhoto(entry: entry, journal: noteClass)) {
+                        NavigationLink(destination: ViewNotePhoto(entry: entry, noteVM: noteVM)) {
                             AsyncImage(url: url) { image in
                                 image.resizable()
                             } placeholder: {
@@ -80,7 +81,7 @@ struct Grid: View {
                         }
                     } else {
                         // If there is no image, show a placeholder
-                        NavigationLink(destination: ViewNotePhoto(entry: entry, journal: noteClass)) {
+                        NavigationLink(destination: ViewNotePhoto(entry: entry, noteVM: noteVM)) {
                             Rectangle()
                                 .fill(Color.gray)
                                 .frame(width: 120, height: 120)

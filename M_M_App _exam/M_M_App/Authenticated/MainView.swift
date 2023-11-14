@@ -13,45 +13,46 @@ struct MainView : View {
     
     var db = Firestore.firestore()
     
-    @StateObject var myNoteClass = NoteClass()
+  //  @StateObject var myNoteClass = NoteClass()
+    @StateObject var notesVM = NotesViewModel()
     @EnvironmentObject var dbConnection: DbConnection
     @EnvironmentObject var themeColor: ThemeColor
     
     @State var showPopUp: Bool = false
     @State var animate: Bool = false
     
-    func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
-    
-        guard let currentUser = dbConnection.currentUser else {return}
-        
-        db.collection("user_data").document(currentUser.uid).collection("notes").addSnapshotListener{
-             snapshot, error in
-             
-             if let error = error {
-                 print("error occured \(error.localizedDescription)")
-                 return
-             }
-             //if we havent received any error then the snapshot has received a value
-             guard let snapshot = snapshot else{return}
-             
-            
-             for document in snapshot.documents{
-                 let result = Result {
-                     try document.data(as: Note.self)
-                 }
-                 
-                 switch result {
-                 case .success(let note):
-                    
-                         self.myNoteClass.addEntry(entry: note)
-                    
-                         print(note.titel)
-                 case .failure(let error):
-                     print(error.localizedDescription)
-                 }
-             }
-         }
-     }
+//    func startListeningToDb(){ /// Funktionen skulle kunna flyttas till Dbonnection, är en Model
+//    
+//        guard let currentUser = dbConnection.currentUser else {return}
+//        
+//        db.collection("user_data").document(currentUser.uid).collection("notes").addSnapshotListener{
+//             snapshot, error in
+//             
+//             if let error = error {
+//                 print("error occured \(error.localizedDescription)")
+//                 return
+//             }
+//             //if we havent received any error then the snapshot has received a value
+//             guard let snapshot = snapshot else{return}
+//             
+//            
+//             for document in snapshot.documents{
+//                 let result = Result {
+//                     try document.data(as: Note.self)
+//                 }
+//                 
+//                 switch result {
+//                 case .success(let note):
+//                    
+//                         self.myNoteClass.addEntry(entry: note)
+//                    
+//                         print(note.titel)
+//                 case .failure(let error):
+//                     print(error.localizedDescription)
+//                 }
+//             }
+//         }
+//     }
     
     var body: some View{
                     VStack{
@@ -111,7 +112,7 @@ struct MainView : View {
                         }
                         
                         /// Note Grid
-                        Grid(noteClass: myNoteClass).frame(height: 380)
+                        Grid(noteVM: notesVM).frame(height: 380)
                         
                         
                         Spacer()
@@ -138,10 +139,12 @@ struct MainView : View {
                             
                         )
                     }.zIndex(5.0)
-                .sheet(isPresented: $showPopUp, content: {AddNote(note: myNoteClass)
+            .sheet(isPresented: $showPopUp, content: {AddNote( NoteVM: NotesViewModel())
                         .environmentObject(dbConnection)
                 })
-        .onAppear(perform: startListeningToDb)
+                .onAppear {if let userId = dbConnection.currentUser?.uid {
+                    notesVM.startListeningToDb(foruserId: userId)
+                }}
         .onAppear(perform: addAnimation)
     }
     

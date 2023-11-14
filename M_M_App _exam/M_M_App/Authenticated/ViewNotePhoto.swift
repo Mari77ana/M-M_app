@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ViewNotePhoto: View {
     var entry: Note
-    @ObservedObject var journal: NoteClass
+   // @ObservedObject var journal: NoteClass
+    @ObservedObject var noteVM: NotesViewModel
     @EnvironmentObject var themeColor: ThemeColor
     
     var body: some View {
@@ -57,7 +58,7 @@ struct ViewNotePhoto: View {
 
 struct ViewNotePhoto_Previews: PreviewProvider {
     static var previews: some View {
-        ViewNotePhoto(entry: Note(titel: "hello", description: "hellooo"), journal: NoteClass())
+        ViewNotePhoto(entry: Note(titel: "hello", description: "hellooo"), noteVM: NotesViewModel())
             .environmentObject(ThemeColor())
     }
 }

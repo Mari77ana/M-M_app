@@ -26,11 +26,11 @@ struct AddNote: View {
    
     @State var isImageSelected = false
     
-    @StateObject var NoteVM = NotesViewModel()
+    @ObservedObject var NoteVM :NotesViewModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dbConnection: DbConnection
     
-    @ObservedObject var note:NoteClass
+    //@ObservedObject var note:NoteClass
         // @Binding var showPopUp: Bool
     
     @FocusState var isTitleFocused:Bool
@@ -227,7 +227,7 @@ struct AddNote: View {
 
 struct AddNote_Previews: PreviewProvider {
     static var previews: some View {
-        AddNote(note: NoteClass())
+        AddNote(NoteVM: NotesViewModel())
             .environmentObject(DbConnection())
             .environmentObject(ThemeColor())
     }

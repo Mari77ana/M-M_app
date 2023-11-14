@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+
+//bridge between pickercontroller and swiftUi
 class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
   
     var picker: ImagePickerView
@@ -15,6 +17,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         self.picker = picker
     }
     
+    //called when user finished picking, it checks if user selected the image and sets a picker on that selected image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             guard let selectedImage = info[.originalImage] as? UIImage else {return}
             self.picker.selectedImage = selectedImage

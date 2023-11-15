@@ -23,11 +23,14 @@ final class M_M_AppTests: XCTestCase {
     }
 
     /// Mark: OWN TESTING FUNCTION
+     
+    // testar kastet, förväntningen borde gå fel, fel endpoint
     func testFetchAdvice() async throws {
         
         do{
             var endpoint = "anotherTestOfHttpsAdress"
             try await sut.fetchAdvice(endpoint: endpoint)
+            // Om inget fel kastas misslyckas testet
             XCTFail("Error did not throw it should have")
             
         }catch{
@@ -36,6 +39,7 @@ final class M_M_AppTests: XCTestCase {
     }
     
     
+    // testar kastet, förväntningar borde inte gå fel
     func apiTest() async throws {
        
         do {
@@ -43,22 +47,25 @@ final class M_M_AppTests: XCTestCase {
             try await sut.fetchAdvice(endpoint: endpoint)
             
         }catch{
-            
+            // Om det kastas misslyckas testet
             XCTFail("Error did not throw when it should have")
         }
     }
     
     
     
+    
+    // testar Api är tomt
     func apiEmtyTest() async throws {
         
         do{
             let endpoint = "https://api.adviceslip.com/advice"
             let advice = try await sut.fetchAdvice(endpoint: endpoint)
+            // Advice ska inte vara tomt
             XCTAssertFalse(advice.isEmpty, "Advice should not be empty")
             
         }catch{
-            
+            // Om den kastar meddelar ett error
             XCTFail("An error occurred")
         }
     }

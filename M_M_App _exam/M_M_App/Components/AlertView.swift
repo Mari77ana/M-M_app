@@ -7,11 +7,15 @@
 
 import SwiftUI
 
+
+
+
+
+// AlertDialog Designas här 
+
 struct AlertView: View {
     
-    
      @Binding var isPresented: Bool
-   // @Binding var isPresented: Bool
     let title: String
     let message: String
     

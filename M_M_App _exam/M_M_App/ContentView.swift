@@ -70,7 +70,7 @@ struct ContentView: View {
     
     @StateObject private var dbConnection = DbConnection()
     
-    @StateObject var themeColor = ThemeColor()  /// Instansiate here for lifecycle and to get access from themeColor to all views
+    @StateObject var themeColor = ThemeColor()  // Instansiate here for lifecycle and to get access from themeColor to all views
     
     var body: some View {
 

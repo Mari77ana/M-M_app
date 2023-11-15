@@ -84,22 +84,26 @@ struct SplashScreenView: View {
     /// kanske jag behöver colorSchemeMode
     
     var body: some View {
-        VStack {
-            Image("cameraIcon")
-                .resizable()
-                .frame(width: 60, height: 60)
-                .rotationEffect(.degrees(rotationAngle))
-                .scaleEffect(size)
-                .opacity(opacity)
-        }
-        .onAppear {
-            triggerSplashAnimation()
-        }
-        .onChange(of: db.currentUser) { _ in
-            triggerSplashAnimation()
-        }
-        .fullScreenCover(isPresented: $isActive) {
+        ZStack{
             
+            themeColor.colorSchemeMode().ignoresSafeArea()
+       
+            VStack {
+                Image("cameraIcon")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .rotationEffect(.degrees(rotationAngle))
+                    .scaleEffect(size)
+                    .opacity(opacity)
+            }
+            .onAppear {
+                triggerSplashAnimation()
+            }
+            .onChange(of: db.currentUser) { _ in
+                triggerSplashAnimation()
+            }
+            .fullScreenCover(isPresented: $isActive) {
+                
                 if db.currentUser != nil {
                     NavigationStack {
                         ZStack {
@@ -116,6 +120,7 @@ struct SplashScreenView: View {
                             themeColor.colorSchemeMode().ignoresSafeArea()
                             themeColor.themeFormCircle()
                             themeColor.themeFormRoundenRectangle()
+                            
                             LoginView()
                         }
                     }
@@ -123,8 +128,9 @@ struct SplashScreenView: View {
                 
             }
             
-
+            
         }
+    }
     
     private func triggerSplashAnimation() {
         // Reset animation properties

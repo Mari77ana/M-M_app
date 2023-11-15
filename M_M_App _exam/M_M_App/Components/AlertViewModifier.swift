@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-// ViewModifier -> protocol som beskriver hur en Alert ska modifieras för att ta in en AlertDialog
+// ViewModifier -> protocol wich describes how an Alert should be modified to include an AlertDialog
 
 struct AlertViewModifier: ViewModifier{
     
@@ -32,7 +32,7 @@ struct AlertViewModifier: ViewModifier{
 }
 extension View{
     
-    //   self.modifier används för att applicera AlertViewModifier
+    //   self.modifier is used to apply AlertViewModifier
     func
     customAlert(isPresented: Binding<Bool>, title: String, message: String) -> some View{
         

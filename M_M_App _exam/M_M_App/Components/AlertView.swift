@@ -11,7 +11,7 @@ import SwiftUI
 
 
 
-// AlertDialog Designas här 
+// AlertDialog designs here
 
 struct AlertView: View {
     

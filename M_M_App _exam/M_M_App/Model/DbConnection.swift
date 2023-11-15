@@ -123,8 +123,15 @@ class DbConnection: ObservableObject{
         }
         return success
         
-    }// Reg Ends
+    }
     
+    
+    
+    
+    
+    
+    
+    // * LOGOUT USER *
     func signOut() {
         do {
             try auth.signOut()
@@ -167,6 +174,10 @@ class DbConnection: ObservableObject{
        // return success
         
        
-    }// Log Ends
+    }
+    
+    
+    
+    
     
 }

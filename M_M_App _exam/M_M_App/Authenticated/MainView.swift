@@ -126,8 +126,13 @@ struct MainView : View {
                 animate.toggle()
             }
         }
-    } // function ends
+    }
+    
+    
 }// View ends
+
+
+
 
 struct MainView_Previews: PreviewProvider {
     

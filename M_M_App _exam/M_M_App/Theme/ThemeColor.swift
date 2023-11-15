@@ -14,7 +14,7 @@ class ThemeColor: ObservableObject {
     
     
     
-    ///    * Dark Mode
+    ///    * Dark Mode *
     func colorSchemeMode() -> Color {
         
         if isDarkModeEnabled {

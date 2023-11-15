@@ -45,12 +45,6 @@ class AdviceViewmodel: ObservableObject {
             
         
         
-        
-        
-        
-        
-        
-        
     }
     
     

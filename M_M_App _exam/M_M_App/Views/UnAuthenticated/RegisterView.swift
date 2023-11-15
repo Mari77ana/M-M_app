@@ -54,7 +54,10 @@ struct RegisterView: View {
                             .padding(.top, 100)
                     }
                     
+                    
+                    // TextFields
                     VStack(spacing: 45){
+                        
                         TextField("Enter your Firstname", text: $firstname)
                             .padding(10)
                             .frame(width: 350, height: 40)
@@ -89,6 +92,7 @@ struct RegisterView: View {
                             .cornerRadius(10)
                         
                         
+                        // Button Confirm
                         Button(action: {
                             if !firstname.isEmpty && !lastname.isEmpty && !email.isEmpty && !password.isEmpty && password == comfirmPassword {
                                 
@@ -100,7 +104,6 @@ struct RegisterView: View {
                                 
                             }
                             
-                            
                         }, label: {
                             Text("Confirm")
                                 .frame(width: 350, height: 45)
@@ -108,7 +111,6 @@ struct RegisterView: View {
                                 .foregroundStyle(.white)
                                 .cornerRadius(30)
                         })
-                        
                         
                         
                         Spacer()
@@ -121,6 +123,10 @@ struct RegisterView: View {
         }
     }
 }
+
+
+
+
 
 struct RegisterView_Previews: PreviewProvider {
     

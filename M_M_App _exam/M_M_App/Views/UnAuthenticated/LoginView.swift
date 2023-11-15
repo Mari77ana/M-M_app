@@ -43,7 +43,7 @@ struct LoginView: View {
                     
                     ZStack {
                         
-                        /// Circle and Image as the background
+                        // Circle and Image as the background
                         Circle()
                             .foregroundColor(.yellow)
                             .frame(width: 200, height: 200)
@@ -67,6 +67,8 @@ struct LoginView: View {
                             .padding(.top, 100)
                     }
                     
+                    
+                    // TextFields
                     VStack(spacing: 45){
                         TextField("Enter your email", text: $email)
                             .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
@@ -80,6 +82,7 @@ struct LoginView: View {
                             .frame(width: 350, height: 40)
                             .border(.black)
                             .cornerRadius(10)
+                        
                         
                         
                         // Login Button
@@ -107,7 +110,9 @@ struct LoginView: View {
                         })
                    
                         
-                        /// Go to Register
+                        
+                        
+                        // Go to Register Link
                         NavigationLink(destination: {
                             RegisterView(db: db)
                         }, label: {

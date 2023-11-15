@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ViewNotePhoto: View {
     
     var entry: Note
     @ObservedObject var noteVM: NotesViewModel
     @EnvironmentObject var themeColor: ThemeColor
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
@@ -56,6 +58,16 @@ struct ViewNotePhoto: View {
                     Text("No image avaible")
                         .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                 }
+                
+                Button("Delete") {
+                              if let userId = Auth.auth().currentUser?.uid {
+                                  noteVM.deleteNote(entry, forUserId: userId)
+                                  presentationMode.wrappedValue.dismiss()  // Dismiss the view after deletion
+                              }
+                          }
+                          .buttonStyle(.bordered)
+                          .foregroundColor(.red)
+                          .padding(.bottom,15)
             }
         }
     }

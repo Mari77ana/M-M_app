@@ -32,6 +32,26 @@ class NotesViewModel: ObservableObject {
         }
     }
     
+    //delete
+    func deleteNote(_ note: Note, forUserId userId: String) {
+            guard let noteId = note.id else {
+                print("Error: Note doesn't have an id")
+                return
+            }
+            
+            let userDocumentRef = db.collection("user_data").document(userId).collection("notes").document(noteId)
+            userDocumentRef.delete { error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                    DispatchQueue.main.async {
+                        self.notes.removeAll { $0.id == note.id }
+                    }
+                }
+            }
+        }
+    
     
     func startListeningToDb(foruserId userId: String){
         

@@ -11,6 +11,7 @@ import Firebase
 struct ViewNotePhoto: View {
     
     var entry: Note
+    var image:UIImage?
     @ObservedObject var noteVM: NotesViewModel
     @EnvironmentObject var themeColor: ThemeColor
     @Environment(\.presentationMode) var presentationMode
@@ -27,37 +28,26 @@ struct ViewNotePhoto: View {
                     .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                 
                 
-                //display image
-                if let imageURL = entry.imageURL, let url = URL(string: imageURL){
-                    
-                    AsyncImage(url: url) {
-                        
-                        phase in
-                        switch phase {
-                            
-                        case .success(let image):
-                            image.resizable()
-                            .frame(width:  380, height: 400).padding(15)
-                       
-                        case .failure:
-                            Text("Unable to load")
-                            
-                        case .empty:
-                            ProgressView()
-                        @unknown default:
-                            EmptyView()
-                        }
+             //display image
+                if let uiImage = image {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .frame(width: 400, height: 400)
+                        .padding(15)
+                }else if let imageURL = entry.imageURL, let url = URL(string: imageURL) {
+                    // Load and display the image from URL
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                            .frame(width: 400, height: 400)
+                            .padding(15)
+                    } placeholder: {
+                        ProgressView()
                     }
-                    
-                    Text(entry.description).padding()
-                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
-                    
-                    Spacer()
-                    
-                }else{
-                    Text("No image avaible")
-                        .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
                 }
+                else {
+                      Text("No image available")
+                          .foregroundStyle(themeColor.isDarkModeEnabled ? Color.gray : Color.black)
+                                }
                 
                 Button("Delete") {
                               if let userId = Auth.auth().currentUser?.uid {
